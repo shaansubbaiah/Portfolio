@@ -1,0 +1,18 @@
+{
+  "name": "gitfoliox",
+  "version": "1.0.0",
+  "description": "Automatically create a Github Portfolio to showcase your projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shaan Subbaiah <shaansubbaiah.cs18@bmsce.ac.in>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "fs-extra": "^9.0.1",
+    "jsdom": "^16.2.2",
+    "ora": "^4.0.4"
+  }
+}
