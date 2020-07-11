@@ -1,6 +1,6 @@
 # portfolio
 
-Live demo at [shaansubbaiah.github.io](shaansubbaiah.github.io)
+Live demo at [shaansubbaiah.github.io](https://shaansubbaiah.github.io/)
 
 ![artwork](/artwork/portfolio-transparent.png)
 
