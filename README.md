@@ -2,6 +2,8 @@
 
 Live demo at [shaansubbaiah.github.io](shaansubbaiah.github.io)
 
+![artwork](/artwork/portfolio-transparent.png)
+
 ## Getting Started
 
 ### Install
