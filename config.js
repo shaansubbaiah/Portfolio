@@ -1,5 +1,5 @@
 module.exports = {
-  username: "shaansubbaiah",
+  username: "harshshankar",
   repos: 10,
   linkedinURL: null,
   twitterId: "shaan",

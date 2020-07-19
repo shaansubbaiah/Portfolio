@@ -150,11 +150,11 @@ async function build() {
       }
 
       e = document.getElementById("repo-grid");
-      let langdiv;
+      let langdiv, namediv;
       const repos = dt.user.pinnedItems.nodes.concat(
         dt.user.repositories.nodes
       );
-      console.log(repos);
+
       for (i = 0; i < repos.length; i++) {
         if (repos[i].primaryLanguage) {
           langdiv = `
@@ -170,11 +170,26 @@ async function build() {
           `;
         }
 
+        if (repos[i].isFork) {
+          namediv = `
+            <svg class="icon-fork">
+                  <use xlink:href="assets/svg/svg-defs.svg#fork"></use>
+            </svg>
+            ${repos[i].name}
+          `;
+        } else {
+          namediv = `
+            ${repos[i].name}
+          `;
+        }
+
         e.innerHTML += `
           <div class="grid-item">
             ${langdiv}
             <div class="repo-about">
-              <span class="repo-title">${repos[i].name}</span>
+              <span class="repo-title">
+                ${namediv}
+              </span>
               <br />
               <span class="repo-desc">${
                 repos[i].description ? repos[i].description : ""

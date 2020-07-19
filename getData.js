@@ -33,7 +33,7 @@ exports.getData = async () => {
           }
         }
       }
-      repositories(privacy: PUBLIC, orderBy: {field: STARGAZERS, direction: DESC}, first: ${cfg.repos}) {
+      repositories(privacy: PUBLIC, orderBy: {field: STARGAZERS, direction: DESC}, first: ${cfg.repos}, ownerAffiliations: OWNER) {
         nodes {
           id
           name
@@ -46,6 +46,7 @@ exports.getData = async () => {
           primaryLanguage {
             name
           }
+          isFork
         }
         pageInfo {
           hasNextPage
