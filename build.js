@@ -46,6 +46,17 @@ async function build() {
 
       let e;
 
+      e = document.getElementById("nav-block");
+      for (let i = 0; i < cfg.navLinks.length; i++) {
+        e.innerHTML += `
+          <span id="${cfg.navLinks[i].name}">
+            <a href="${cfg.navLinks[i].link}">
+              ${cfg.navLinks[i].name}
+            </a>
+          </span>
+        `;
+      }
+
       e = document.getElementById("name-block");
       e.innerHTML = dt.user.name;
 
@@ -71,19 +82,29 @@ async function build() {
             <span>${dt.user.login}</span>
           </a>
         </div>
-        <div id="pf-info-location">
-          <svg class="pf-info-icon icon-f">
-            <use xlink:href="assets/svg/svg-defs.svg#map-pin" />
-          </svg>
-          <span>${dt.user.location}</span>
-        </div>
-        <div id="pf-info-company">
-          <svg class="pf-info-icon icon-f">
-            <use xlink:href="assets/svg/svg-defs.svg#users" />
-          </svg>
-          <span>${dt.user.company}</span>
-        </div>
       `;
+
+      if (dt.user.location) {
+        e.innerHTML += `
+          <div id="pf-info-location">
+            <svg class="pf-info-icon icon-f">
+              <use xlink:href="assets/svg/svg-defs.svg#map-pin" />
+            </svg>
+            <span>${dt.user.location}</span>
+          </div>
+        `;
+      }
+
+      if (dt.user.company) {
+        e.innerHTML += `
+          <div id="pf-info-company">
+            <svg class="pf-info-icon icon-f">
+              <use xlink:href="assets/svg/svg-defs.svg#users" />
+            </svg>
+            <span>${dt.user.company}</span>
+          </div>
+        `;
+      }
 
       if (cfg.linkedinURL) {
         e.innerHTML += `
@@ -113,6 +134,19 @@ async function build() {
         `;
       } else {
         spinner.info("Skipping Twitter details");
+      }
+
+      for (let i = 0; i < cfg.infoLinks.length; i++) {
+        e.innerHTML += `
+          <div>
+            <svg class="pf-info-icon icon-f">
+              <use xlink:href="assets/svg/svg-defs.svg#link" />
+            </svg>
+            <a href="${cfg.infoLinks[i].link}">
+              <span>${cfg.infoLinks[i].name}</span>
+            </a>
+          </div>
+        `;
       }
 
       e = document.getElementById("repo-grid");
