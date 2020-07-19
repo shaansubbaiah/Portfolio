@@ -16,12 +16,29 @@ exports.getData = async () => {
       name
       login
       location
+      pinnedItems(first: 6, types: REPOSITORY) {
+        nodes {
+          ... on Repository {
+            id
+            name
+            description
+            forkCount
+            url
+            stargazers {
+              totalCount
+            }
+            primaryLanguage {
+              name
+            }
+          }
+        }
+      }
       repositories(privacy: PUBLIC, orderBy: {field: STARGAZERS, direction: DESC}, first: ${cfg.repos}) {
         nodes {
           id
+          name
           description
           forkCount
-          name
           url
           stargazers {
             totalCount

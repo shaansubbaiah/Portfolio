@@ -151,11 +151,15 @@ async function build() {
 
       e = document.getElementById("repo-grid");
       let langdiv;
-      for (i = 0; i < dt.user.repositories.nodes.length; i++) {
-        if (dt.user.repositories.nodes[i].primaryLanguage) {
+      const repos = dt.user.pinnedItems.nodes.concat(
+        dt.user.repositories.nodes
+      );
+      console.log(repos);
+      for (i = 0; i < repos.length; i++) {
+        if (repos[i].primaryLanguage) {
           langdiv = `
             <div class="repo-lang">
-              <span>${dt.user.repositories.nodes[i].primaryLanguage.name}</span>
+              <span>${repos[i].primaryLanguage.name}</span>
             </div>
           `;
         } else {
@@ -170,27 +174,21 @@ async function build() {
           <div class="grid-item">
             ${langdiv}
             <div class="repo-about">
-              <span class="repo-title">${
-                dt.user.repositories.nodes[i].name
-              }</span>
+              <span class="repo-title">${repos[i].name}</span>
               <br />
               <span class="repo-desc">${
-                dt.user.repositories.nodes[i].description
-                  ? dt.user.repositories.nodes[i].description
-                  : ""
+                repos[i].description ? repos[i].description : ""
               }</span>
             </div>
             <div class="repo-stats">
               <svg class="icon-star">
                 <use xlink:href="assets/svg/svg-defs.svg#star" />
               </svg>
-              <span>${
-                dt.user.repositories.nodes[i].stargazers.totalCount
-              }</span>
+              <span>${repos[i].stargazers.totalCount}</span>
               <svg class="icon-fork">
                 <use xlink:href="assets/svg/svg-defs.svg#fork" />
               </svg>
-              <span>${dt.user.repositories.nodes[i].forkCount}</span>
+              <span>${repos[i].forkCount}</span>
             </div>
           </div>
 
