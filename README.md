@@ -1,6 +1,7 @@
 # portfolio
 
-Still WIP
+**Still WIP**
+
 Live demo at [shaansubbaiah.github.io](https://shaansubbaiah.github.io/)
 
 ![artwork](/artwork/portfolio-transparent.png)
@@ -12,6 +13,8 @@ Live demo at [shaansubbaiah.github.io](https://shaansubbaiah.github.io/)
 Fork or Clone the repository
 
 ```bash
+# Install Node.JS from https://nodejs.org/en/download/
+# then in the clones directory run
 npm install
 ```
 
@@ -31,7 +34,7 @@ touch .env && echo GITHUB_TOKEN="token" > .env
 node build.js
 ```
 
-Done! Copy contents in the _dist_ folder to your github pages repository.
+**Done!** Copy contents in the _dist_ folder to your github pages repository.
 Eg. your-username.github.io
 
 ## Configuration
