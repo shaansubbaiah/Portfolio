@@ -1,6 +1,8 @@
 # portfolio
 
-Live demo at shaansubbaiah.github.io
+Live demo at [shaansubbaiah.github.io](https://shaansubbaiah.github.io/)
+
+![artwork](/artwork/portfolio-transparent.png)
 
 ## Getting Started
 
@@ -33,13 +35,13 @@ Eg. your-username.github.io
 
 ## Configuration
 
-username: Your Github username
+**username**: Your Github username
 
-repos: Number of repositories to display, max 100
+**repos**: Number of repositories to display, max 100
 
-linkedinURL: your LinkedIn profile link. Set to _null_ to disable it
+**linkedinURL**: your LinkedIn profile link. Set to _null_ to disable it
 
-twitterId: your Twitter profile id. Set to _null_ to disable it
+**twitterId**: your Twitter profile id. Set to _null_ to disable it
 
 navLinks: adds navigation links at the top. **don't exceed 3**
 
@@ -48,4 +50,5 @@ infoLinks: adds additional links in the information section
 ## Related
 
 [Gitfolio](https://github.com/imfunniee/gitfolio)
+
 [Dev Portfolio](https://github.com/RyanFitzgerald/devportfolio)
