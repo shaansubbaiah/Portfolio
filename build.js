@@ -150,7 +150,8 @@ async function build() {
       }
 
       e = document.getElementById("repo-grid");
-      let langdiv, namediv;
+      let langdiv = ``,
+        namediv = ``;
       const repos = dt.user.pinnedItems.nodes.concat(
         dt.user.repositories.nodes
       );
@@ -162,12 +163,6 @@ async function build() {
               <span>${repos[i].primaryLanguage.name}</span>
             </div>
           `;
-        } else {
-          langdiv = `
-            <div class="repo-lang" style="display: none">
-              <span>?</span>
-            </div>
-          `;
         }
 
         if (repos[i].isFork) {
@@ -175,11 +170,6 @@ async function build() {
             <svg class="icon-fork">
                   <use xlink:href="assets/svg/svg-defs.svg#fork"></use>
             </svg>
-            ${repos[i].name}
-          `;
-        } else {
-          namediv = `
-            ${repos[i].name}
           `;
         }
 
@@ -187,13 +177,16 @@ async function build() {
           <div class="grid-item">
             ${langdiv}
             <div class="repo-about">
-              <span class="repo-title">
-                ${namediv}
-              </span>
-              <br />
-              <span class="repo-desc">${
-                repos[i].description ? repos[i].description : ""
-              }</span>
+              <a href="${repos[i].url}">
+                <span class="repo-title">
+                  ${namediv}
+                  ${repos[i].name}
+                </span>
+                <br />
+                <span class="repo-desc">${
+                  repos[i].description ? repos[i].description : ""
+                }</span>
+              </a>
             </div>
             <div class="repo-stats">
               <svg class="icon-star">

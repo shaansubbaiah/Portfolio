@@ -450,6 +450,11 @@ a {
   stroke-linejoin: round;
 }
 
+.repo-title .icon-fork {
+  fill: var(--text-primary);
+  opacity: 80%;
+}
+
 /* for feather icons 
   fill: none;
   stroke: YOUR_COLOR;
