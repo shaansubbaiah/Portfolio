@@ -127,8 +127,8 @@ async function build() {
             <svg class="pf-info-icon icon-f">
               <use xlink:href="assets/svg/svg-defs.svg#twitter" />
             </svg>
-            <a href="https://twitter.com/${cfg.twitter}">
-              <span>${cfg.twitter}</span>
+            <a href="https://twitter.com/${cfg.twitterId}">
+              <span>${cfg.twitterId}</span>
             </a>
           </div>
         `;

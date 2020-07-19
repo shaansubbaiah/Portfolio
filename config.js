@@ -1,8 +1,8 @@
 module.exports = {
-  username: "harshshankar",
+  username: "shaansubbaiah",
   repos: 10,
   linkedinURL: null,
-  twitterId: null,
+  twitterId: "shaan",
   infoLinks: [
     {
       name: "gitlab",

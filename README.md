@@ -41,6 +41,10 @@ linkedinURL: your LinkedIn profile link. Set to _null_ to disable it
 
 twitterId: your Twitter profile id. Set to _null_ to disable it
 
+navLinks: adds navigation links at the top. **don't exceed 3**
+
+infoLinks: adds additional links in the information section
+
 ## Related
 
 [Gitfolio](https://github.com/imfunniee/gitfolio)
