@@ -4,7 +4,8 @@
   "description": "Automatically generates a responsive, static-site with the user’s Github projects.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start": ""
   },
   "author": "Shaan Subbaiah <shaansubbaiah.cs18@bmsce.ac.in>",
   "license": "MIT",
@@ -14,5 +15,6 @@
     "fs-extra": "^9.0.1",
     "jsdom": "^16.2.2",
     "ora": "^4.0.4"
+	
   }
 }
