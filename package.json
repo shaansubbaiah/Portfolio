@@ -1,7 +1,7 @@
 {
-  "name": "gitfoliox",
+  "name": "portfolio",
   "version": "1.0.0",
-  "description": "Automatically create a Github Portfolio to showcase your projects",
+  "description": "Automatically generates a responsive, static-site with the user’s Github projects.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
