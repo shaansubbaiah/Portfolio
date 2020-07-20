@@ -521,3 +521,11 @@ a {
   /* positioned relatively, bottom -25px */
   bottom: -32px;
 }
+
+.color-mode-btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.color-mode-btn:hover {
+  transform: rotate(-20deg);
+}
