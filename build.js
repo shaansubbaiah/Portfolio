@@ -60,6 +60,9 @@ async function build() {
       e = document.getElementById("name-block");
       e.innerHTML = dt.user.name;
 
+      e = document.getElementById("bio-block");
+      e.innerHTML = dt.user.bio;
+
       e = document.getElementById("pf-img-container");
       e.innerHTML = `
         <img

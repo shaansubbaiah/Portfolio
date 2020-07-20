@@ -2,3 +2,4 @@ node_modules
 dist
 .directory
 .env
+test_script.js
