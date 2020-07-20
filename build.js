@@ -7,6 +7,21 @@ const options = {
   resources: "usable",
 };
 
+function getRepos(x, y) {
+  const repos = x.concat(y);
+  let uniqueRepos = [repos[0]];
+  for (let i = 0; i < repos.length; i++) {
+    let repoExists = false;
+    for (let j = 0; j < uniqueRepos.length; j++) {
+      if (uniqueRepos[j].id == repos[i].id) {
+        repoExists = true;
+      }
+    }
+    if (!repoExists) uniqueRepos.push(repos[i]);
+  }
+  return uniqueRepos;
+}
+
 async function build() {
   let spinner = ora("Starting").start();
   let dt;
@@ -152,7 +167,9 @@ async function build() {
       e = document.getElementById("repo-grid");
       let langdiv = ``,
         namediv = ``;
-      const repos = dt.user.pinnedItems.nodes.concat(
+
+      const repos = getRepos(
+        dt.user.pinnedItems.nodes,
         dt.user.repositories.nodes
       );
 

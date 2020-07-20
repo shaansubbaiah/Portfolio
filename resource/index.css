@@ -196,12 +196,7 @@ a {
   align-items: center;
 
   height: 40px;
-  padding: 0px 20px;
-  border-radius: 28px;
-
-  color: var(--text-secondary);
-  background: var(--background-secondary);
-
+  color: var(--background-secondary);
   font-weight: 600;
 }
 
