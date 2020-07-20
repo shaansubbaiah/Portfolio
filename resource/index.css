@@ -390,6 +390,12 @@ a {
   line-height: 24px;
 }
 
+/* 
+
+  Icons 
+
+*/
+
 .color-mode-toggle {
   position: absolute;
   right: 10px;
@@ -455,14 +461,59 @@ a {
   opacity: 80%;
 }
 
-/* for feather icons 
-  fill: none;
-  stroke: YOUR_COLOR;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+/* 
+  for feather icons 
+    fill: none;
+    stroke: YOUR_COLOR;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+  for jam icons  
+    fill: YOUR_COLOR; 
 */
 
-/* for jam icons  
-   fill: YOUR_COLOR; 
+/* 
+
+  Animations :D 
+
 */
+
+/* profile image animations */
+
+#pf-img-source,
+#pf-img-shadow {
+  transition: all 0.3s ease-in-out;
+}
+
+#pf-img-container:hover > #pf-img-source {
+  /* positioned relatively, top -20px */
+  top: -28px;
+}
+
+#pf-img-container:hover > #pf-img-shadow {
+  /* positioned relatively, top -145px */
+  top: 142px;
+}
+
+/* repository card animations */
+
+.repo-lang,
+.repo-about,
+.repo-stats {
+  transition: all 0.3s ease-in-out;
+}
+
+.grid-item:hover > .repo-lang {
+  /* positioned relatively, top -25px */
+  top: -32px;
+}
+
+.grid-item:hover > .repo-about {
+  transform: scale(1.03);
+}
+
+.grid-item:hover > .repo-stats {
+  /* positioned relatively, bottom -25px */
+  bottom: -32px;
+}
