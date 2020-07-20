@@ -345,6 +345,10 @@ a {
   line-height: 36px;
 
   color: var(--text-primary);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .repo-desc {

@@ -182,7 +182,6 @@ async function build() {
                   ${namediv}
                   ${repos[i].name}
                 </span>
-                <br />
                 <span class="repo-desc">${
                   repos[i].description ? repos[i].description : ""
                 }</span>
