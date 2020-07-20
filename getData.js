@@ -9,7 +9,6 @@ exports.getData = async () => {
     user(login: "${cfg.username}") {
       avatarUrl(size: 500)
       bio
-      anyPinnableItems(type: REPOSITORY)
       company
       createdAt
       email
