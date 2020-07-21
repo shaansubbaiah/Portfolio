@@ -7,7 +7,7 @@
   --background: #f3f4f6;
   --background-primary: #ffffff;
   --text-primary: #000000;
-  --background-secondary: #000000;
+  --background-secondary: #0075ff;
   --text-secondary: #ffffff;
   --background-tertiary: #f9f9f9;
   --text-tertiary: #333333;
@@ -290,8 +290,8 @@ a {
 
 .grid-item {
   /* horizontal gap between repo cards  */
-  margin-bottom: 60px;
-  margin-top: 10px;
+  margin-bottom: 80px;
+  margin-top: 20px;
 }
 
 .repo-lang {

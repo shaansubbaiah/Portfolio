@@ -155,7 +155,7 @@ async function build() {
         e.innerHTML += `
           <div>
             <svg class="pf-info-icon icon-f">
-              <use xlink:href="assets/svg/svg-defs.svg#link" />
+              <use xlink:href="assets/svg/svg-defs.svg#gitlab" />
             </svg>
             <a href="${cfg.infoLinks[i].link}">
               <span>${cfg.infoLinks[i].name}</span>
