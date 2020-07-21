@@ -1,7 +1,5 @@
 # portfolio
 
-**Still WIP**
-
 Live demo at [shaansubbaiah.github.io](https://shaansubbaiah.github.io/)
 
 ![artwork](/artwork/portfolio-transparent.png)
@@ -46,6 +44,8 @@ Eg. your-username.github.io
 **linkedinURL**: your LinkedIn profile link. Set to _null_ to disable it
 
 **twitterId**: your Twitter profile id. Set to _null_ to disable it
+
+**gitlabId**: your GitLab profile id. Set to _null_ to disable it
 
 **navLinks**: adds navigation links at the top. **don't exceed 3**
 
