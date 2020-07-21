@@ -87,6 +87,9 @@ async function build() {
           />
       `;
 
+      e = document.getElementById("bio-block");
+      e.innerHTML = dt.user.bio;
+
       e = document.getElementById("pf-info-container");
       e.innerHTML = `
         <div id="pf-info-github">
