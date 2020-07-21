@@ -98,7 +98,7 @@ async function build() {
           <svg class="pf-info-icon icon-f">
             <use xlink:href="assets/svg/svg-defs.svg#github" />
           </svg>
-          <a href=${dt.user.url}>
+          <a target="_blank" href=${dt.user.url}>
             <span>${dt.user.login}</span>
           </a>
         </div>
@@ -132,7 +132,7 @@ async function build() {
             <svg class="pf-info-icon icon-f">
               <use xlink:href="assets/svg/svg-defs.svg#linkedin" />
             </svg>
-            <a href="${cfg.linkedinURL}">
+            <a target="_blank" href="${cfg.linkedinURL}">
               <span>${dt.user.name}</span>
             </a>
           </div>
@@ -147,7 +147,7 @@ async function build() {
             <svg class="pf-info-icon icon-f">
               <use xlink:href="assets/svg/svg-defs.svg#twitter" />
             </svg>
-            <a href="https://twitter.com/${cfg.twitterId}">
+            <a target="_blank" href="https://twitter.com/${cfg.twitterId}">
               <span>${cfg.twitterId}</span>
             </a>
           </div>
@@ -162,7 +162,7 @@ async function build() {
             <svg class="pf-info-icon icon-f">
               <use xlink:href="assets/svg/svg-defs.svg#gitlab" />
             </svg>
-            <a href="https://gitlab.com/${cfg.gitlabId}">
+            <a target="_blank" href="https://gitlab.com/${cfg.gitlabId}">
               <span>${cfg.gitlabId}</span>
             </a>
           </div>
