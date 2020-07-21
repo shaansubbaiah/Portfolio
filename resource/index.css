@@ -107,8 +107,14 @@ a {
     line-height: 27px !important;
   }
 
-  #pf-info-container div {
-    margin: 15px 0 0 0 !important;
+  #pf-info-status {
+    text-align: start !important;
+    padding: 0 0 15px 10px !important;
+  }
+
+  #pf-info-links {
+    justify-content: start !important;
+    flex-flow: column wrap !important;
   }
 
   .pf-info-icon {
@@ -264,7 +270,20 @@ a {
   opacity: 96%;
 }
 
-#pf-info-container div {
+#pf-info-status {
+  text-align: center;
+  padding-bottom: 15px;
+  width: 320px;
+}
+
+#pf-info-links {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: center;
+}
+
+#pf-info-links div {
   margin: 5px 10px;
 
   display: flex;

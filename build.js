@@ -87,7 +87,12 @@ async function build() {
           />
       `;
 
-      e = document.getElementById("pf-info-container");
+      if (dt.user.bio) {
+        e = document.getElementById("pf-info-status");
+        e.innerHTML = `${dt.user.bio}`;
+      }
+
+      e = document.getElementById("pf-info-links");
       e.innerHTML = `
         <div id="pf-info-github">
           <svg class="pf-info-icon icon-f">
@@ -149,6 +154,21 @@ async function build() {
         `;
       } else {
         spinner.info("Skipping Twitter details");
+      }
+
+      if (cfg.gitlabId) {
+        e.innerHTML += `
+          <div id="pf-info-gitlab">
+            <svg class="pf-info-icon icon-f">
+              <use xlink:href="assets/svg/svg-defs.svg#gitlab" />
+            </svg>
+            <a href="https://gitlab.com/${cfg.gitlabId}">
+              <span>${cfg.gitlabId}</span>
+            </a>
+          </div>
+        `;
+      } else {
+        spinner.info("Skipping Gitlab details");
       }
 
       for (let i = 0; i < cfg.infoLinks.length; i++) {

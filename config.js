@@ -1,25 +1,18 @@
 module.exports = {
-  username: "harshshankar",
+  username: "sumanth-vs",
   repos: 10,
-  linkedinURL: null,
-  twitterId: "shaan",
+  linkedinURL: "Sumanth",
+  twitterId: "_sumanth_vs",
+  gitlabId: "sumanth",
   infoLinks: [
     {
-      name: "gitlab",
-      link: "https://www.gitlab.com",
-    },
-    {
-      name: "behance",
+      name: "Behance",
       link: "https://www.behance.net/",
     },
   ],
   navLinks: [
     {
-      name: "resumé",
-      link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    },
-    {
-      name: "about",
+      name: "Resumé",
       link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     },
   ],
