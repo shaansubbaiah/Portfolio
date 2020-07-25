@@ -37,19 +37,27 @@ Eg. your-username.github.io
 
 ## Configuration
 
-**username**: Your Github username
+**username**: String - Your Github username
 
-**repos**: Number of repositories to display, max 100
+**repos**: Integer - Number of repositories to display, max 100
 
-**linkedinURL**: your LinkedIn profile link. Set to _null_ to disable it
+**linkedinURL**: String - your LinkedIn profile link. Set to _null_ to disable it
 
-**twitterId**: your Twitter profile id. Set to _null_ to disable it
+**twitterId**: String - your Twitter profile id. Set to _null_ to disable it
 
-**gitlabId**: your GitLab profile id. Set to _null_ to disable it
+**gitlabId**: String - your GitLab profile id. Set to _null_ to disable it
 
-**navLinks**: adds navigation links at the top. **don't exceed 3**
+**navLinks**: Object Array - adds navigation links at the top. **don't exceed 3**
+    
+    where,
+    name: String - Text to display
+    link: String - URL the text links to
 
-**infoLinks**: adds additional links in the information section
+**infoLinks**: Object Array - adds additional links in the information section
+    
+    where,
+    name: String - Text to display
+    link: String - URL the text links to
 
 ## Related
 
