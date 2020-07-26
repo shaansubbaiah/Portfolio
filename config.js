@@ -1,19 +1,19 @@
 module.exports = {
-  username: "sumanth-vs",
+  username: "YOUR_GITHUB_USERNAME",
   repos: 10,
-  linkedinURL: "Sumanth",
-  twitterId: "_sumanth_vs",
-  gitlabId: "sumanth",
+  linkedinURL: "YOUR_LINKEDIN_URL",
+  twitterId: "YOUR_TWITTER_ID",
+  gitlabId: "YOUR_GITLAB_ID",
   infoLinks: [
     {
       name: "Behance",
-      link: "https://www.behance.net/",
+      link: "LINK_TO_YOUR_BEHANCE",
     },
   ],
   navLinks: [
     {
       name: "Resumé",
-      link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      link: "YOUR_RESUME_LINK",
     },
   ],
 };
