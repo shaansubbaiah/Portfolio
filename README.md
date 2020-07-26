@@ -18,13 +18,16 @@ npm install
 
 Edit settings in _config.js_, see [Configuration](#configuration)
 
-Replace _token_ with you Github token
-
-```bash
-touch .env && echo GITHUB_TOKEN="token" > .env
-```
+Replace _token_ with your Github token
+1. Run this in terminal, where _token_ is your Github Token
+    ```bash
+    touch .env && echo GITHUB_TOKEN="token" > .env
+    ```
+2. Or create a file name `.env` and in it type `GITHUB_TOKEN="token"`, where _token_ is your Github Token
 
 > See how to create a Github token [HERE](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
+
+> Make sure you have selected atleast **public_repo**, **read:user** permissions while creating the token!
 
 ### Build the site
 
