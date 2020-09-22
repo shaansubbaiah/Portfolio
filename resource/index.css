@@ -1,6 +1,7 @@
 :root {
   --icon-sun-color: #ffd932;
   --icon-moon-color: #0075ff;
+  --highlight-color: #930ae8;
 }
 
 :root[color-mode="light"] {
@@ -60,7 +61,18 @@ a {
   text-decoration: inherit;
 }
 
-/* mobile first  */
+/* selection color */
+::-moz-selection {
+  background: var(--highlight-color);
+}
+::-webkit-selection {
+  background: var(--highlight-color);
+}
+::selection {
+  background: var(--highlight-color);
+}
+
+/* mobile first */
 #container {
   display: grid;
   grid-template-columns: 5% 90% 5%;
