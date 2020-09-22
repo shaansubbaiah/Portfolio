@@ -2,11 +2,11 @@
     <img src="./artwork/logo.png">
     <br>
     Live demo at <a href="https://shaansubbaiah.github.io">shaansubbaiah.github.io</a>
+    <br>
+    <img src="./artwork/mobile-screenshot.png" width="693" height="789">
+    <br>
+    <img src="./artwork/desktop-screenshot.png">
 </div>
-
-![artwork](./artwork/mobile-screenshot.png)
-
-![artwork](./artwork/desktop-screenshot.png)
 
 ## Getting Started
 
