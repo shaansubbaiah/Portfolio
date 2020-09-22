@@ -499,6 +499,7 @@ a {
 
 /* profile image animations */
 
+#pf-img-container,
 #pf-img-source,
 #pf-img-shadow {
   transition: all 0.3s ease-in-out;
@@ -512,6 +513,7 @@ a {
 #pf-img-container:hover > #pf-img-shadow {
   /* positioned relatively, top -145px */
   top: 142px;
+  opacity: 0.45;
 }
 
 /* repository card animations */

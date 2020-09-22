@@ -64,7 +64,7 @@ exports.build = async () => {
       document.title = dt.user.name ? dt.user.name : cfg.username;
 
       document.head.innerHTML += `
-      <link rel="icon" href="${dt.user.avatarUrl}">
+        <link rel="icon" href="${dt.user.avatarUrl}">
       `;
 
       let e;
