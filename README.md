@@ -1,39 +1,38 @@
-# portfolio
+<div align="center">
+    <img src="./artwork/logo.png">
+    <br>
+    Live demo at <a href="https://shaansubbaiah.github.io">shaansubbaiah.github.io</a>
+</div>
 
-Live demo at [shaansubbaiah.github.io](https://shaansubbaiah.github.io/)
+![artwork](./artwork/mobile-screenshot.png)
 
-![artwork](/artwork/portfolio-transparent.png)
+![artwork](./artwork/desktop-screenshot.png)
 
 ## Getting Started
 
 ### Install
 
-Fork or Clone the repository
+1. Fork or Clone the repository
+
+2. Install dependencies
 
 ```bash
-# Install Node.JS from https://nodejs.org/en/download/
-# then in the clones directory run
 npm install
 ```
 
-Edit settings in _config.js_, see [Configuration](#configuration)
+3. Run Portfolio
 
-Replace _token_ with your Github token
-1. Run this in terminal, where _token_ is your Github Token
-    ```bash
-    touch .env && echo GITHUB_TOKEN="token" > .env
-    ```
-2. Or create a file name `.env` and in it type `GITHUB_TOKEN="token"`, where _token_ is your Github Token
+```bash
+node portfolio.js
+```
+
+4. Set the Github token, edit the config and then build!
+
+> See [Configuration](#configuration)
 
 > See how to create a Github token [HERE](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
 
 > Make sure you have selected atleast **public_repo**, **read:user** permissions while creating the token!
-
-### Build the site
-
-```bash
-node build.js
-```
 
 **Done!** Copy contents in the _dist_ folder to your github pages repository.
 Eg. your-username.github.io
@@ -51,17 +50,16 @@ Eg. your-username.github.io
 **gitlabId**: String - your GitLab profile id. Set to _null_ to disable it
 
 **navLinks**: Object Array - adds navigation links at the top. **don't exceed 3**
-    
+
     where,
     name: String - Text to display
     link: String - URL the text links to
 
 **infoLinks**: Object Array - adds additional links in the information section
-    
+
     where,
     name: String - Text to display
     link: String - URL the text links to
-
 
 ## Contributors
 
