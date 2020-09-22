@@ -107,7 +107,7 @@ a {
     line-height: 27px !important;
   }
 
-  #pf-info-status {
+  #pf-info-bio {
     text-align: start !important;
     padding: 0 0 15px 10px !important;
   }
@@ -270,7 +270,7 @@ a {
   opacity: 96%;
 }
 
-#pf-info-status {
+#pf-info-bio {
   text-align: center;
   padding-bottom: 15px;
   width: 320px;
@@ -542,4 +542,9 @@ a {
 
 .color-mode-btn:hover {
   transform: rotate(-20deg);
+}
+
+/* make user mentions BOLD */
+.user-mention {
+  font-weight: 600;
 }

@@ -19,7 +19,7 @@ exports.getData = async () => {
   {
     user(login: "${cfg.username}") {
       avatarUrl(size: 500)
-      bio
+      bioHTML
       company
       createdAt
       name

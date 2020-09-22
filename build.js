@@ -93,9 +93,9 @@ exports.build = async () => {
           />
       `;
 
-      if (dt.user.bio) {
-        e = document.getElementById("pf-info-status");
-        e.innerHTML = `${dt.user.bio}`;
+      if (dt.user.bioHTML) {
+        e = document.getElementById("pf-info-bio");
+        e.innerHTML = `${dt.user.bioHTML}`;
       }
 
       e = document.getElementById("pf-info-links");
