@@ -1,9 +1,20 @@
 const axios = require("axios");
-const cfg = require("./config");
 const dotenv = require("dotenv");
+const fs = require("fs-extra");
+const path = require("path");
 dotenv.config();
 
 exports.getData = async () => {
+  let cfg;
+
+  try {
+    cfg = await fs.readJson(path.join(__dirname, "config.json"), {
+      throws: false,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+
   const dataQuery = `
   {
     user(login: "${cfg.username}") {
@@ -11,11 +22,13 @@ exports.getData = async () => {
       bio
       company
       createdAt
-      email
       name
       login
       location
-      pinnedItems(first: 6, types: REPOSITORY) {
+      pinnedItems(
+        first: 6, 
+        types: REPOSITORY
+        ) {
         nodes {
           ... on Repository {
             id
@@ -32,7 +45,12 @@ exports.getData = async () => {
           }
         }
       }
-      repositories(privacy: PUBLIC, orderBy: {field: STARGAZERS, direction: DESC}, first: ${cfg.repos}, ownerAffiliations: OWNER) {
+      repositories(
+        privacy: PUBLIC, 
+        orderBy: {field: STARGAZERS, direction: DESC}, 
+        first: ${parseInt(cfg.repos)}, 
+        ownerAffiliations: OWNER
+        ) {
         nodes {
           id
           name

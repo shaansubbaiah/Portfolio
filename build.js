@@ -1,7 +1,6 @@
 const fs = require("fs-extra");
-const cfg = require("./config");
-const ora = require("ora");
 const jsdom = require("jsdom").JSDOM;
+const path = require("path");
 const { getData } = require("./getData");
 const options = {
   resources: "usable",
@@ -22,46 +21,53 @@ function getRepos(x, y) {
   return uniqueRepos;
 }
 
-async function build() {
-  let spinner = ora("Starting").start();
-  let dt;
+exports.build = async () => {
+  console.log("\nStarting Build");
+  let dt, cfg;
 
-  spinner.text = "Fetching data from Github";
+  try {
+    cfg = await fs.readJson(path.join(__dirname, "config.json"), {
+      throws: false,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+
   await getData()
     .then((data) => {
       dt = data;
-      spinner.succeed("Fetched data from Github");
+      console.log("✔️ Fetched data from Github");
     })
     .catch((err) => {
-      spinner.warn("Error: " + err.message);
-      spinner.warn("Failed!");
+      console.log("⚠️ Failed!");
+      console.error("Error: " + err.message);
       process.exit(1);
     });
 
-  spinner.text = "Copying files";
   await fs
     .copy("./resource", "./dist")
     .then(() => {
-      spinner.succeed("Copied files");
+      console.log("✔️ Copied files");
     })
     .catch((err) => {
-      spinner.warn("Error: " + err.message);
-      spinner.warn("Failed!");
+      console.log("⚠️ Failed!");
+      console.error("Error: " + err.message);
       process.exit(1);
     });
 
-  spinner.text = "Building Website";
   jsdom
-    .fromFile(`${__dirname}/resource/index.html`, options)
+    .fromFile(path.join(`${__dirname}`, `resource`, `index.html`), options)
     .then((dom) => {
       let window = dom.window,
         document = window.document;
 
-      document.title = dt.user.name;
+      document.title = dt.user.name ? dt.user.name : cfg.username;
 
       let e;
 
       e = document.getElementById("nav-block");
+
+      console.log(`❗ Adding [${cfg.navLinks.length}] Nav Links`);
       for (let i = 0; i < cfg.navLinks.length; i++) {
         e.innerHTML += `
           <span id="${cfg.navLinks[i].name}">
@@ -138,7 +144,7 @@ async function build() {
           </div>
         `;
       } else {
-        spinner.info("Skipping LinkedIn details");
+        console.log("❗ Skipping LinkedIn details");
       }
 
       if (cfg.twitterId) {
@@ -153,7 +159,7 @@ async function build() {
           </div>
         `;
       } else {
-        spinner.info("Skipping Twitter details");
+        console.log("❗ Skipping Twitter details");
       }
 
       if (cfg.gitlabId) {
@@ -168,9 +174,10 @@ async function build() {
           </div>
         `;
       } else {
-        spinner.info("Skipping Gitlab details");
+        console.log("❗ Skipping GitLab details");
       }
 
+      console.log(`❗ Adding [${cfg.infoLinks.length}] Info Links`);
       for (let i = 0; i < cfg.infoLinks.length; i++) {
         e.innerHTML += `
           <div>
@@ -238,23 +245,25 @@ async function build() {
 
           `;
       }
-      spinner.succeed("Built website");
+      console.log("✔️ Built website");
 
-      spinner.text = "Saving to ./dist";
-      fs.writeFile(
+      fs.outputFile(
         "./dist/index.html",
-        "<!DOCTYPE html>" + document.documentElement.outerHTML,
-        function (err) {
-          if (err) throw err;
-        }
-      );
-      spinner.succeed("Saved to ./dist");
-      spinner.stopAndPersist({ symbol: "🎉", text: "Success!" });
+        "<!DOCTYPE html>" + document.documentElement.outerHTML
+      )
+        .then(() => {
+          console.log("✔️ Saved to ./dist");
+          console.log("🎉 Success!");
+        })
+        .catch((err) => {
+          console.log("⚠️ Failed!");
+          console.error("Error: " + err.message);
+        });
     })
     .catch((err) => {
-      spinner.warn("Failed!");
-      console.log(err);
+      console.log("⚠️ Failed!");
+      console.error("Error: " + err.message);
     });
-}
 
-build();
+  return;
+};
