@@ -63,10 +63,13 @@ exports.build = async () => {
 
       document.title = dt.user.name ? dt.user.name : cfg.username;
 
+      document.head.innerHTML += `
+      <link rel="icon" href="${dt.user.avatarUrl}">
+      `;
+
       let e;
 
       e = document.getElementById("nav-block");
-
       console.log(`❗ Adding [${cfg.navLinks.length}] Nav Links`);
       for (let i = 0; i < cfg.navLinks.length; i++) {
         e.innerHTML += `
