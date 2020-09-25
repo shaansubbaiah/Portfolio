@@ -12,7 +12,7 @@
 
 ### Install
 
-1. Fork or Clone the repository
+1. Download and extract the [latest release](https://github.com/shaansubbaiah/Portfolio/releases)
 
 2. Install dependencies
 
