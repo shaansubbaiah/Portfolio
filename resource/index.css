@@ -65,9 +65,11 @@ a {
 ::-moz-selection {
   background: var(--highlight-color);
 }
+
 ::-webkit-selection {
   background: var(--highlight-color);
 }
+
 ::selection {
   background: var(--highlight-color);
 }
@@ -353,7 +355,13 @@ a {
 }
 
 .repo-about {
-  background: var(--background-primary);
+  /* commenting background primary to enable frosted glass effect */
+  /* background: var(--background-primary); */
+
+  /* frosted glass effect */
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(60px);
+
 
   border-radius: 28px;
   box-shadow: var(--card-shadow);
@@ -517,12 +525,12 @@ a {
   transition: all 0.3s ease-in-out;
 }
 
-#pf-img-container:hover > #pf-img-source {
+#pf-img-container:hover>#pf-img-source {
   /* positioned relatively, top -20px */
   top: -28px;
 }
 
-#pf-img-container:hover > #pf-img-shadow {
+#pf-img-container:hover>#pf-img-shadow {
   /* positioned relatively, top -145px */
   top: 142px;
   opacity: 0.45;
@@ -536,16 +544,16 @@ a {
   transition: all 0.3s ease-in-out;
 }
 
-.grid-item:hover > .repo-lang {
+.grid-item:hover>.repo-lang {
   /* positioned relatively, top -25px */
   top: -32px;
 }
 
-.grid-item:hover > .repo-about {
+.grid-item:hover>.repo-about {
   transform: scale(1.03);
 }
 
-.grid-item:hover > .repo-stats {
+.grid-item:hover>.repo-stats {
   /* positioned relatively, bottom -25px */
   bottom: -32px;
 }
