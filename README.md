@@ -41,15 +41,15 @@ Eg. your-username.github.io
 
 **username**: String - Your Github username
 
-**repos**: Integer - Number of repositories to display, max 100
+**repos**: Integer - Number of repositories to display, **MAX 100**
 
-**linkedinURL**: String - your LinkedIn profile link. Set to _null_ to disable it
+**linkedinURL**: String - your LinkedIn profile link. Set to _null_ in config.json to disable it / press <kbd>enter</kbd> while setting it up.
 
-**twitterId**: String - your Twitter profile id. Set to _null_ to disable it
+**twitterId**: String - your Twitter profile id. Set to _null_ in config.json to disable it / press <kbd>enter</kbd> while setting it up.
 
-**gitlabId**: String - your GitLab profile id. Set to _null_ to disable it
+**gitlabId**: String - your GitLab profile id. Set to _null_ in config.json to disable it / press <kbd>enter</kbd> while setting it up.
 
-**navLinks**: Object Array - adds navigation links at the top. **don't exceed 3**
+**navLinks**: Object Array - adds navigation links at the top. **DON'T EXCEED 3**
 
     where,
     name: String - Text to display
