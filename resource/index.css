@@ -78,11 +78,19 @@ a {
   grid-template-columns: 5% 90% 5%;
   grid-template-rows: auto;
   grid-template-areas:
-    ". profile-image ."
-    ". name-block ."
-    ". profile-info ."
+    ". sidebar-block ."
     ". nav-block ."
     ". repo-block .";
+}
+
+#sidebar-block {
+  grid-area: sidebar-block;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-areas:
+    ". profile-image ."
+    ". name-block ."
+    ". profile-info .";
 }
 
 #repo-block {
@@ -93,16 +101,36 @@ a {
   margin: 0 auto;
 }
 
+
+@media only screen and (min-width: 750px) {
+  
+}
 /* for desktops, >750px  */
 @media only screen and (min-width: 750px) {
   #container {
     display: grid;
     grid-template-columns: 5% 30% 60% 5%;
-    grid-template-rows: 200px 400px auto;
+    grid-template-rows: 200px auto;
     grid-template-areas:
-      ". name-block nav-block ."
-      ". profile-image repo-block ."
-      ". profile-info repo-block .";
+      ". sidebar-block nav-block ."
+      ". sidebar-block repo-block .";
+  }
+
+  #sidebar-block {
+    grid-area: sidebar-block;
+    display: grid;
+    grid-template-rows: 200px 400px;
+    grid-template-areas:
+      ". name-block ."
+      ". profile-image ."
+      ". profile-info .";
+
+  }
+
+  #sidebar-block {
+    position: fixed;
+    top: 0;
+    margin-left: 5%;
   }
 
   #pf-img-container {
