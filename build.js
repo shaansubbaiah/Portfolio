@@ -82,8 +82,7 @@ exports.build = async () => {
       }
 
       e = document.getElementById("name-block");
-      e.innerHTML = dt.user.name;
-
+      e.innerHTML = dt.user.name ? dt.user.name : dt.user.login;
       e = document.getElementById("pf-img-container");
       e.innerHTML = `
         <img
@@ -161,6 +160,17 @@ exports.build = async () => {
             </a>
           </div>
         `;
+      }else if(dt.user.twitterUsername){
+        e.innerHTML += `
+        <div id="pf-info-twitter">
+          <svg class="pf-info-icon icon-f">
+            <use xlink:href="assets/svg/svg-defs.svg#twitter" />
+          </svg>
+          <a target="_blank" href="https://twitter.com/${dt.user.twitterUsername}">
+            <span>${dt.user.twitterUsername}</span>
+          </a>
+        </div>
+      `;
       } else {
         console.log("❗ Skipping Twitter details");
       }
@@ -251,9 +261,9 @@ exports.build = async () => {
       console.log("✔️ Built website");
 
       fs.outputFile(
-        "./dist/index.html",
-        "<!DOCTYPE html>" + document.documentElement.outerHTML
-      )
+          "./dist/index.html",
+          "<!DOCTYPE html>" + document.documentElement.outerHTML
+        )
         .then(() => {
           console.log("✔️ Saved to ./dist");
           console.log("🎉 Success!");
