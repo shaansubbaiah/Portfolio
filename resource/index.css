@@ -408,6 +408,7 @@ a {
   line-height: 24px;
 
   color: var(--text-primary);
+  word-break: break-word;
 }
 
 .repo-stats {
