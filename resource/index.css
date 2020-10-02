@@ -120,7 +120,6 @@ a {
       ". name-block ."
       ". profile-image ."
       ". profile-info .";
-
   }
 
   #sidebar-block {
@@ -451,9 +450,9 @@ a {
 */
 
 .color-mode-toggle {
-  position: absolute;
-  right: 10px;
-  top: 10px;
+  position: fixed;
+  right: 5px;
+  top: 5px;
 }
 
 .color-mode-btn {
