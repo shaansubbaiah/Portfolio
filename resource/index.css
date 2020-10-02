@@ -101,10 +101,6 @@ a {
   margin: 0 auto;
 }
 
-
-@media only screen and (min-width: 750px) {
-  
-}
 /* for desktops, >750px  */
 @media only screen and (min-width: 750px) {
   #container {
