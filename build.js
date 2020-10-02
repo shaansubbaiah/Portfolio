@@ -1,7 +1,9 @@
 const fs = require("fs-extra");
 const jsdom = require("jsdom").JSDOM;
 const path = require("path");
-const { getData } = require("./getData");
+const {
+  getData
+} = require("./getData");
 const options = {
   resources: "usable",
 };
@@ -72,9 +74,13 @@ exports.build = async () => {
       e = document.getElementById("nav-block");
       console.log(`❗ Adding [${cfg.navLinks.length}] Nav Links`);
       for (let i = 0; i < cfg.navLinks.length; i++) {
+        var link = cfg.navLinks[i].link;
+        if (!/^https?:\/\//i.test(link)) {
+          link = 'https://' + link;
+        }
         e.innerHTML += `
           <span id="${cfg.navLinks[i].name}">
-            <a href="${cfg.navLinks[i].link}">
+            <a href="${link}">
               ${cfg.navLinks[i].name}
             </a>
           </span>
@@ -160,7 +166,7 @@ exports.build = async () => {
             </a>
           </div>
         `;
-      }else if(dt.user.twitterUsername){
+      } else if (dt.user.twitterUsername) {
         e.innerHTML += `
         <div id="pf-info-twitter">
           <svg class="pf-info-icon icon-f">
@@ -191,19 +197,28 @@ exports.build = async () => {
       }
 
       console.log(`❗ Adding [${cfg.infoLinks.length}] Info Links`);
+      if (dt.user.websiteUrl) {
+        cfg.infoLinks.unshift({
+          name: dt.user.websiteUrl.replace(/^https?:\/\//, ''),
+          link: dt.user.websiteUrl
+        })
+      }
       for (let i = 0; i < cfg.infoLinks.length; i++) {
+        var link = cfg.infoLinks[i].link;
+        if (!/^https?:\/\//i.test(link)) {
+          link = 'https://' + link;
+        }
         e.innerHTML += `
           <div>
             <svg class="pf-info-icon icon-f">
               <use xlink:href="assets/svg/svg-defs.svg#link" />
             </svg>
-            <a href="${cfg.infoLinks[i].link}">
+            <a href="${link}">
               <span>${cfg.infoLinks[i].name}</span>
             </a>
           </div>
         `;
       }
-
       e = document.getElementById("repo-grid");
       let langdiv = ``,
         namediv = ``;
