@@ -4,6 +4,7 @@
   "description": "Automatically generates a responsive, static-site with the user’s Github projects.",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon portfolio.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Shaan Subbaiah <shaansubbaiah.cs18@bmsce.ac.in>",
@@ -12,6 +13,7 @@
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "fs-extra": "^9.0.1",
-    "jsdom": "^16.2.2"
+    "jsdom": "^16.2.2",
+    "nodemon": "^2.0.4"
   }
 }
