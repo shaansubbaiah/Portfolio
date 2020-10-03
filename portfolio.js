@@ -10,10 +10,13 @@ const rl = readline.createInterface({
 
 // helper function to handle async readline functions
 // @SEE: https://stackoverflow.com/a/57416896
-function question(theQuestion) {
-  return new Promise((resolve) =>
-    rl.question(theQuestion, (ans) => resolve(ans))
-  );
+function question(theQuestion, defaultValue) {
+  return new Promise((resolve) => {
+    rl.question(theQuestion, (ans) => resolve(ans));
+    if (defaultValue) {
+      rl.write(defaultValue);
+    }
+  });
 }
 
 function getChoice(theQuestion) {
@@ -55,19 +58,22 @@ async function setConfig() {
       cfg = await fs.readJson("config.json", { throws: false });
     }
 
-    data = await question("\nGitHub username: ");
+    data = await question("\nGitHub username: ", cfg.username);
     cfg.username = data ? data : null;
 
-    data = await question("No. of repositories: ");
+    data = await question("No. of repositories: ", cfg.repos);
     cfg.repos = data ? data : null;
 
-    data = await question("Linkedin URL: ");
+    data = await question("Avatar path or url, or blank for GitHub: ", cfg.avatar);
+    cfg.avatar = data ? data : null;
+
+    data = await question("Linkedin URL: ", cfg.linkedinURL);
     cfg.linkedinURL = data ? data : null;
 
-    data = await question("Twitter ID: ");
+    data = await question("Twitter ID: ", cfg.twitterId);
     cfg.twitterId = data ? data : null;
 
-    data = await question("GitLab username: ");
+    data = await question("GitLab username: ", cfg.gitlabId);
     cfg.gitlabId = data ? data : null;
 
     let choice, i;
