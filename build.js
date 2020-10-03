@@ -1,3 +1,4 @@
+const axios = require('axios');
 const fs = require("fs-extra");
 const jsdom = require("jsdom").JSDOM;
 const path = require("path");
@@ -45,6 +46,23 @@ exports.build = async () => {
       process.exit(1);
     });
 
+  await axios({
+      method: 'get',
+      url: dt.user.avatarUrl,
+      responseType: 'arraybuffer',
+    })
+    .then((response) => {
+      return fs.outputFile("./dist/assets/png/avatar.png", response.data)
+    })
+    .then(() => {
+      console.log("✔️ Fetched avatar from Github");
+    })
+    .catch((err) => {
+      console.log("⚠️ Failed!");
+      console.error("Error: " + err.message);
+      process.exit(1);
+    });
+
   await fs
     .copy("./resource", "./dist")
     .then(() => {
@@ -65,7 +83,7 @@ exports.build = async () => {
       document.title = dt.user.name ? dt.user.name : cfg.username;
 
       document.head.innerHTML += `
-        <link rel="icon" href="${dt.user.avatarUrl}">
+        <link rel="icon" href="assets/png/avatar.png">
       `;
 
       let e;
@@ -92,11 +110,11 @@ exports.build = async () => {
       e.innerHTML = `
         <img
             id="pf-img-source"
-            src="${dt.user.avatarUrl}"
+            src="assets/png/avatar.png"
           />
         <img
             id="pf-img-shadow"
-            src="${dt.user.avatarUrl}"
+            src="assets/png/avatar.png"
           />
       `;
 
