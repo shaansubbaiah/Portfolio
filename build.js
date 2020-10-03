@@ -1,9 +1,8 @@
 const fs = require("fs-extra");
 const jsdom = require("jsdom").JSDOM;
 const path = require("path");
-const {
-  getData
-} = require("./getData");
+const pretty = require("pretty");
+const { getData } = require("./getData");
 const options = {
   resources: "usable",
 };
@@ -76,7 +75,7 @@ exports.build = async () => {
       for (let i = 0; i < cfg.navLinks.length; i++) {
         var link = cfg.navLinks[i].link;
         if (!/^https?:\/\//i.test(link)) {
-          link = 'https://' + link;
+          link = "https://" + link;
         }
         e.innerHTML += `
           <span id="${cfg.navLinks[i].name}">
@@ -199,14 +198,14 @@ exports.build = async () => {
       console.log(`❗ Adding [${cfg.infoLinks.length}] Info Links`);
       if (dt.user.websiteUrl) {
         cfg.infoLinks.unshift({
-          name: dt.user.websiteUrl.replace(/^https?:\/\//, ''),
-          link: dt.user.websiteUrl
-        })
+          name: dt.user.websiteUrl.replace(/^https?:\/\//, ""),
+          link: dt.user.websiteUrl,
+        });
       }
       for (let i = 0; i < cfg.infoLinks.length; i++) {
         var link = cfg.infoLinks[i].link;
         if (!/^https?:\/\//i.test(link)) {
-          link = 'https://' + link;
+          link = "https://" + link;
         }
         e.innerHTML += `
           <div>
@@ -275,10 +274,12 @@ exports.build = async () => {
       }
       console.log("✔️ Built website");
 
-      fs.outputFile(
-          "./dist/index.html",
-          "<!DOCTYPE html>" + document.documentElement.outerHTML
-        )
+      let prettyHTML = pretty(
+        "<!DOCTYPE html>" + document.documentElement.outerHTML,
+        { ocd: true }
+      );
+
+      fs.outputFile("./dist/index.html", prettyHTML)
         .then(() => {
           console.log("✔️ Saved to ./dist");
           console.log("🎉 Success!");
