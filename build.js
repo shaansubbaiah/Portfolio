@@ -1,8 +1,8 @@
-const axios = require('axios');
 const fs = require("fs-extra");
 const jsdom = require("jsdom").JSDOM;
 const path = require("path");
 const pretty = require("pretty");
+const { getAvatar } = require("./getAvatar");
 const { getData } = require("./getData");
 const options = {
   resources: "usable",
@@ -46,16 +46,13 @@ exports.build = async () => {
       process.exit(1);
     });
 
-  await axios({
-      method: 'get',
-      url: dt.user.avatarUrl,
-      responseType: 'arraybuffer',
-    })
-    .then((response) => {
-      return fs.outputFile("./dist/assets/png/avatar.png", response.data)
+  await getAvatar(cfg.avatar || dt.user.avatarUrl)
+    .then((buffer) => {
+      const ext = cfg.avatar ? path.extname(cfg.avatar).slice(1) : 'png';
+      return fs.outputFile(`./dist/assets/${ext}/avatar.${ext}`, buffer)
     })
     .then(() => {
-      console.log("✔️ Fetched avatar from Github");
+      console.log("✔️ Copied avatar");
     })
     .catch((err) => {
       console.log("⚠️ Failed!");
@@ -82,8 +79,10 @@ exports.build = async () => {
 
       document.title = dt.user.name ? dt.user.name : cfg.username;
 
+      const avatarExt = cfg.avatar ? path.extname(cfg.avatar).slice(1) : 'png';
+      const avatarPath = `assets/${avatarExt}/avatar.${avatarExt}`
       document.head.innerHTML += `
-        <link rel="icon" href="assets/png/avatar.png">
+        <link rel="icon" href="${avatarPath}">
       `;
 
       let e;
@@ -110,11 +109,11 @@ exports.build = async () => {
       e.innerHTML = `
         <img
             id="pf-img-source"
-            src="assets/png/avatar.png"
+            src="${avatarPath}"
           />
         <img
             id="pf-img-shadow"
-            src="assets/png/avatar.png"
+            src="${avatarPath}"
           />
       `;
 
