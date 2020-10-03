@@ -74,12 +74,13 @@ async function setConfig() {
 
     cfg.navLinks = [];
     i = 0;
+    console.log("Add Navigation links: (don't exceed 3)");
     do {
-      choice = await getChoice(`Add Navigation link [${i}] (Y/n): `);
+      choice = await getChoice(`  Link ${i} (Y/n): `);
       if (choice == "yes") {
         let obj = {};
-        obj.name = await question("  Display name: ");
-        obj.link = await question("  Link: ");
+        obj.name = await question("    Display name: ");
+        obj.link = await question("    Link: ");
         cfg.navLinks[i] = obj;
         i++;
       } else if (choice == "no") {
@@ -89,12 +90,13 @@ async function setConfig() {
 
     cfg.infoLinks = [];
     i = 0;
+    console.log("Add Information links: (don't exceed 4)");
     do {
-      choice = await getChoice(`Add Info link [${i}] (Y/n): `);
+      choice = await getChoice(`  Link ${i} (Y/n): `);
       if (choice == "yes") {
         let obj = {};
-        obj.name = await question("Display name: ");
-        obj.link = await question("Link: ");
+        obj.name = await question("    Display name: ");
+        obj.link = await question("    Link: ");
         cfg.infoLinks[i] = obj;
         i++;
       } else if (choice == "no") {
@@ -104,6 +106,7 @@ async function setConfig() {
 
     await fs.writeJson("./config.json", cfg, { spaces: "\t" });
     const obj = await fs.readJson("./config.json", { throws: false });
+    console.log("\nConfig written to ./config.json");
     console.log(obj); // => null
 
     console.log("🎉 Config set!");
