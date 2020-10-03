@@ -64,7 +64,7 @@ async function setConfig() {
     data = await question("No. of repositories: ", cfg.repos);
     cfg.repos = data ? data : null;
 
-    data = await question("Avatar path or url, or blank for GitHub: ", cfg.avatar);
+    data = await question("Avatar path or url: ", cfg.avatar);
     cfg.avatar = data ? data : null;
 
     data = await question("Linkedin URL: ", cfg.linkedinURL);
