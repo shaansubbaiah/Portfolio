@@ -8,6 +8,8 @@
     <img src="./artwork/desktop-screenshot.png">
 </div>
 
+If you find Portfolio useful, make sure to 🌟 the repository and spread the word!
+
 ## Getting Started
 
 ### Install
@@ -74,3 +76,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 [Gitfolio](https://github.com/imfunniee/gitfolio)
 
 [Dev Portfolio](https://github.com/RyanFitzgerald/devportfolio)
+
+## License
+
+[MIT](LICENSE) Copyright (c) 2020 Shaan Subbaiah
