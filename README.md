@@ -43,7 +43,7 @@ Eg. your-username.github.io
 
 **repos**: Integer - number of repositories to display, **MAX 100**
 
-**avatar**: String - path(local/remote) to an image for the avatar and favicon. If not specified, uses your GitHub avatar.  
+**avatar**: String - path(local/remote) to an image for the avatar and favicon. If not specified, uses your GitHub avatar.
 
 **linkedinURL**: String - your LinkedIn profile link. Set to _null_ in config.json to disable it / press <kbd>enter</kbd> while setting it up.
 
@@ -63,7 +63,9 @@ Eg. your-username.github.io
     name: String - Text to display
     link: String - URL the text links to
 
-## Contributors
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 [![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/0)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/0)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/1)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/1)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/2)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/2)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/3)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/3)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/4)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/4)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/5)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/5)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/6)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/6)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/7)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/7)
 
