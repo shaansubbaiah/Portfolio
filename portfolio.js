@@ -36,8 +36,8 @@ function getChoice(theQuestion) {
 async function setToken() {
   try {
     const token = await question(
-      "\n// Github token should have atleast public_repo, read:user permissions\n" +
-        "// After setting the token, you have to restart the program to build the site.\n" +
+      "\n// Github token should have at least public_repo, read:user permissions\n" +
+        "// A token can be created at https://github.com/settings/tokens/new .\n" +
         "Github token: "
     );
     await fs.outputFile(`./.env`, `GITHUB_TOKEN="${token}"`);

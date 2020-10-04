@@ -2,9 +2,11 @@ const axios = require("axios");
 const dotenv = require("dotenv");
 const fs = require("fs-extra");
 const path = require("path");
-dotenv.config();
 
 exports.getData = async () => {
+  // Don't eager load because the key might not be set yet.
+  dotenv.config();
+
   let cfg;
 
   try {
