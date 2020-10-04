@@ -1,7 +1,7 @@
 const fs = require("fs-extra");
 const readline = require("readline");
 const path = require("path");
-const { build } = require("./build.js");
+const { build } = require("./utils/build");
 
 const rl = readline.createInterface({
   input: process.stdin,

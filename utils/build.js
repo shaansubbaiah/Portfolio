@@ -270,9 +270,8 @@ exports.build = async () => {
                   ${namediv}
                   ${repos[i].name}
                 </span>
-                <span class="repo-desc">${
-                  repos[i].description ? repos[i].description : ""
-                }</span>
+                <span class="repo-desc">${repos[i].description ? repos[i].description : ""
+          }</span>
               </a>
             </div>
             <div class="repo-stats">
