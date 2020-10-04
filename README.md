@@ -39,9 +39,11 @@ Eg. your-username.github.io
 
 ## Configuration
 
-**username**: String - Your Github username
+**username**: String - your Github username
 
-**repos**: Integer - Number of repositories to display, **MAX 100**
+**repos**: Integer - number of repositories to display, **MAX 100**
+
+**avatar**: String - path(local/remote) to an image for the avatar and favicon. If not specified, uses your GitHub avatar.  
 
 **linkedinURL**: String - your LinkedIn profile link. Set to _null_ in config.json to disable it / press <kbd>enter</kbd> while setting it up.
 
