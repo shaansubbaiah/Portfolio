@@ -30,7 +30,7 @@ node portfolio.js
 
 > See [Configuration](#configuration)
 
-> See how to create a Github token [HERE](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
+> A token can be created at https://github.com/settings/tokens/new
 
 > Make sure you have selected atleast **public_repo**, **read:user** permissions while creating the token!
 
