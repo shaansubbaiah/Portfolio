@@ -37,8 +37,8 @@ async function setToken() {
   try {
     const token = await question(
       "\n// Github token should have at least public_repo, read:user permissions\n" +
-        "// A token can be created at https://github.com/settings/tokens/new .\n" +
-        "Github token: "
+      "// A token can be created at https://github.com/settings/tokens/new .\n" +
+      "Github token: "
     );
     await fs.outputFile(`./.env`, `GITHUB_TOKEN="${token}"`);
     console.log(`🎉 Token Set!`);
@@ -52,7 +52,7 @@ async function setConfig() {
   let cfg = {};
 
   try {
-    const exists = await fs.existsSync(path.join(__dirname, "config.json"));
+    const exists = await fs.existsSync(path.join(__dirname + "/utils/", "config.json"));
 
     if (exists) {
       cfg = await fs.readJson("config.json", { throws: false });
@@ -110,9 +110,9 @@ async function setConfig() {
       }
     } while (choice != "no");
 
-    await fs.writeJson("./config.json", cfg, { spaces: "\t" });
-    const obj = await fs.readJson("./config.json", { throws: false });
-    console.log("\nConfig written to ./config.json");
+    await fs.writeJson("./utils/config.json", cfg, { spaces: "\t" });
+    const obj = await fs.readJson("./utils/config.json", { throws: false });
+    console.log("\nConfig written to ./utils/config.json");
     console.log(obj); // => null
 
     console.log("🎉 Config set!");
@@ -127,8 +127,8 @@ async function setConfig() {
 async function portfolio() {
   console.log(
     "█▀█ █▀█ █▀█ ▀█▀ █▀▀ █▀█ █░░ █ █▀█\n" +
-      "█▀▀ █▄█ █▀▄ ░█░ █▀░ █▄█ █▄▄ █ █▄█\n" +
-      "https://github.com/shaansubbaiah/Portfolio"
+    "█▀▀ █▄█ █▀▄ ░█░ █▀░ █▄█ █▄▄ █ █▄█\n" +
+    "https://github.com/shaansubbaiah/Portfolio"
   );
 
   let ch;

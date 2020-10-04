@@ -72,13 +72,12 @@ exports.build = async () => {
     });
 
   jsdom
-    .fromFile(path.join(`${__dirname}`, `resource`, `index.html`), options)
+    .fromFile(path.join(`${__dirname}/../`, `resource`, `index.html`), options)
     .then((dom) => {
       let window = dom.window,
         document = window.document;
 
       document.title = dt.user.name ? dt.user.name : cfg.username;
-
       const avatarExt = cfg.avatar ? path.extname(cfg.avatar).slice(1) : 'png';
       const avatarPath = `assets/${avatarExt}/avatar.${avatarExt}`
       document.head.innerHTML += `
