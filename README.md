@@ -59,11 +59,13 @@ Eg. your-username.github.io
     name: String - Text to display
     link: String - URL the text links to
 
-**infoLinks**: Object Array - adds additional links in the information section
+**infoLinks**: Object Array - adds additional links in the information section.
 
-    where,
+    where
     name: String - Text to display
     link: String - URL the text links to
+
+**socialPreviewImage**: String - displays repo's social preview image in the card. To enable, set value = "enabled".
 
 ## Contributing
 
