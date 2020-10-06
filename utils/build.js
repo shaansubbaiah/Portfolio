@@ -28,7 +28,7 @@ exports.build = async () => {
   let dt, cfg;
 
   try {
-    cfg = await fs.readJson(path.join(__dirname + "/../", "config.json"), {
+    cfg = await fs.readJson(path.join(__dirname, "..", "config.json"), {
       throws: false,
     });
   } catch (err) {
@@ -72,7 +72,7 @@ exports.build = async () => {
     });
 
   jsdom
-    .fromFile(path.join(`${__dirname}/../`, `resource`, `index.html`), options)
+    .fromFile(path.join(__dirname, "..", "resource", "index.html"), options)
     .then((dom) => {
       let window = dom.window,
         document = window.document;
@@ -235,9 +235,8 @@ exports.build = async () => {
           </div>
         `;
       }
+
       e = document.getElementById("repo-grid");
-      let langdiv = ``,
-        namediv = ``;
 
       const repos = getRepos(
         dt.user.pinnedItems.nodes,
@@ -245,29 +244,21 @@ exports.build = async () => {
       );
 
       for (i = 0; i < repos.length; i++) {
-        if (repos[i].primaryLanguage) {
-          langdiv = `
-            <div class="repo-lang">
-              <span>${repos[i].primaryLanguage.name}</span>
-            </div>
-          `;
-        }
-
-        if (repos[i].isFork) {
-          namediv = `
-            <svg class="icon-fork">
-                  <use xlink:href="assets/svg/svg-defs.svg#fork"></use>
-            </svg>
-          `;
-        }
-
         e.innerHTML += `
           <div class="grid-item">
-            ${repos[i].primaryLanguage ? langdiv : ""}
+            ${
+              repos[i].primaryLanguage
+                ? `<div class="repo-lang"><span>${repos[i].primaryLanguage.name}</span></div>`
+                : ""
+            }
             <div class="repo-about">
               <a href="${repos[i].url}">
                 <span class="repo-title">
-                  ${repos[i].isFork ? namediv : ""}
+                  ${
+                    repos[i].isFork
+                      ? `<svg class="icon-fork"><use xlink:href="assets/svg/svg-defs.svg#fork"></use></svg>`
+                      : ""
+                  }
                   ${repos[i].name}
                 </span>
                 <span class="repo-desc">

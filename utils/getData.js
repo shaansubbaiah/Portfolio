@@ -10,7 +10,7 @@ exports.getData = async () => {
   let cfg;
 
   try {
-    cfg = await fs.readJson(path.join(__dirname + "/../", "config.json"), {
+    cfg = await fs.readJson(path.join(__dirname, "..", "config.json"), {
       throws: false,
     });
   } catch (err) {
