@@ -48,8 +48,8 @@ exports.build = async () => {
 
   await getAvatar(cfg.avatar || dt.user.avatarUrl)
     .then((buffer) => {
-      const ext = cfg.avatar ? path.extname(cfg.avatar).slice(1) : 'png';
-      return fs.outputFile(`./dist/assets/${ext}/avatar.${ext}`, buffer)
+      const ext = cfg.avatar ? path.extname(cfg.avatar).slice(1) : "png";
+      return fs.outputFile(`./dist/assets/${ext}/avatar.${ext}`, buffer);
     })
     .then(() => {
       console.log("✔️ Copied avatar");
@@ -79,8 +79,8 @@ exports.build = async () => {
 
       document.title = dt.user.name ? dt.user.name : cfg.username;
 
-      const avatarExt = cfg.avatar ? path.extname(cfg.avatar).slice(1) : 'png';
-      const avatarPath = `assets/${avatarExt}/avatar.${avatarExt}`
+      const avatarExt = cfg.avatar ? path.extname(cfg.avatar).slice(1) : "png";
+      const avatarPath = `assets/${avatarExt}/avatar.${avatarExt}`;
       document.head.innerHTML += `
         <link rel="icon" href="${avatarPath}">
       `;
@@ -263,11 +263,11 @@ exports.build = async () => {
 
         e.innerHTML += `
           <div class="grid-item">
-            ${langdiv}
+            ${repos[i].primaryLanguage ? langdiv : ""}
             <div class="repo-about">
               <a href="${repos[i].url}">
                 <span class="repo-title">
-                  ${namediv}
+                  ${repos[i].isFork ? namediv : ""}
                   ${repos[i].name}
                 </span>
                 <span class="repo-desc">${
@@ -286,7 +286,6 @@ exports.build = async () => {
               <span>${repos[i].forkCount}</span>
             </div>
           </div>
-
           `;
       }
       console.log("✔️ Built website");
