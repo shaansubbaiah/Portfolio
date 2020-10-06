@@ -52,7 +52,7 @@ async function setConfig() {
   let cfg = {};
 
   try {
-    const exists = await fs.existsSync(path.join(__dirname + "/utils/", "config.json"));
+    const exists = await fs.existsSync(path.join(__dirname, "config.json"));
 
     if (exists) {
       cfg = await fs.readJson("config.json", { throws: false });
@@ -110,9 +110,9 @@ async function setConfig() {
       }
     } while (choice != "no");
 
-    await fs.writeJson("./utils/config.json", cfg, { spaces: "\t" });
-    const obj = await fs.readJson("./utils/config.json", { throws: false });
-    console.log("\nConfig written to ./utils/config.json");
+    await fs.writeJson("config.json", cfg, { spaces: "\t" });
+    const obj = await fs.readJson("config.json", { throws: false });
+    console.log("\nConfig written to config.json");
     console.log(obj); // => null
 
     console.log("🎉 Config set!");
