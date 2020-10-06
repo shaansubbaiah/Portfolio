@@ -6,9 +6,9 @@
     <img src="./artwork/mobile-screenshot.png" width="693" height="789">
     <br>
     <img src="./artwork/desktop-screenshot.png">
+    <br>
+    If you find <strong>Portfolio</strong> useful, make sure to 🌟 the repository and <strong>spread the word!</strong>
 </div>
-
-If you find Portfolio useful, make sure to 🌟 the repository and spread the word!
 
 ## Getting Started
 
