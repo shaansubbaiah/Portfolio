@@ -44,6 +44,8 @@ exports.getData = async () => {
             primaryLanguage {
               name
             }
+            usesCustomOpenGraphImage
+            openGraphImageUrl
           }
         }
       }
@@ -66,6 +68,8 @@ exports.getData = async () => {
             name
           }
           isFork
+          usesCustomOpenGraphImage
+          openGraphImageUrl
         }
         pageInfo {
           hasNextPage

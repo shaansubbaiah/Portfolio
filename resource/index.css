@@ -411,6 +411,11 @@ a {
   word-break: break-word;
 }
 
+.repo-socialprev-img {
+  width: 320px;
+  border-radius: 16px;
+}
+
 .repo-stats {
   position: absolute;
   z-index: 1;

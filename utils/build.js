@@ -270,8 +270,14 @@ exports.build = async () => {
                   ${repos[i].isFork ? namediv : ""}
                   ${repos[i].name}
                 </span>
-                <span class="repo-desc">${repos[i].description ? repos[i].description : ""
-          }</span>
+                <span class="repo-desc">
+                ${
+                  cfg.socialPreviewImage == "enabled" &&
+                  repos[i].usesCustomOpenGraphImage == true
+                    ? `<img class="repo-socialprev-img" src="${repos[i].openGraphImageUrl}">`
+                    : ""
+                }
+                ${repos[i].description ? repos[i].description : ""}</span>
               </a>
             </div>
             <div class="repo-stats">
@@ -285,7 +291,7 @@ exports.build = async () => {
               <span>${repos[i].forkCount}</span>
             </div>
           </div>
-          `;
+        `;
       }
       console.log("✔️ Built website");
 
