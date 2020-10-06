@@ -28,7 +28,7 @@ exports.build = async () => {
   let dt, cfg;
 
   try {
-    cfg = await fs.readJson(path.join(__dirname, "config.json"), {
+    cfg = await fs.readJson(path.join(__dirname + "/../", "config.json"), {
       throws: false,
     });
   } catch (err) {
@@ -72,7 +72,7 @@ exports.build = async () => {
     });
 
   jsdom
-    .fromFile(path.join(`${__dirname}`, `resource`, `index.html`), options)
+    .fromFile(path.join(`${__dirname}/../`, `resource`, `index.html`), options)
     .then((dom) => {
       let window = dom.window,
         document = window.document;
@@ -270,9 +270,8 @@ exports.build = async () => {
                   ${repos[i].isFork ? namediv : ""}
                   ${repos[i].name}
                 </span>
-                <span class="repo-desc">${
-                  repos[i].description ? repos[i].description : ""
-                }</span>
+                <span class="repo-desc">${repos[i].description ? repos[i].description : ""
+          }</span>
               </a>
             </div>
             <div class="repo-stats">

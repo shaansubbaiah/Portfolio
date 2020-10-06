@@ -1,7 +1,7 @@
 const fs = require("fs-extra");
 const readline = require("readline");
 const path = require("path");
-const { build } = require("./build.js");
+const { build } = require("./utils/build");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -37,8 +37,8 @@ async function setToken() {
   try {
     const token = await question(
       "\n// Github token should have at least public_repo, read:user permissions\n" +
-        "// A token can be created at https://github.com/settings/tokens/new .\n" +
-        "Github token: "
+      "// A token can be created at https://github.com/settings/tokens/new .\n" +
+      "Github token: "
     );
     await fs.outputFile(`./.env`, `GITHUB_TOKEN="${token}"`);
     console.log(`🎉 Token Set!`);
@@ -110,9 +110,9 @@ async function setConfig() {
       }
     } while (choice != "no");
 
-    await fs.writeJson("./config.json", cfg, { spaces: "\t" });
-    const obj = await fs.readJson("./config.json", { throws: false });
-    console.log("\nConfig written to ./config.json");
+    await fs.writeJson("config.json", cfg, { spaces: "\t" });
+    const obj = await fs.readJson("config.json", { throws: false });
+    console.log("\nConfig written to config.json");
     console.log(obj); // => null
 
     console.log("🎉 Config set!");
@@ -127,8 +127,8 @@ async function setConfig() {
 async function portfolio() {
   console.log(
     "█▀█ █▀█ █▀█ ▀█▀ █▀▀ █▀█ █░░ █ █▀█\n" +
-      "█▀▀ █▄█ █▀▄ ░█░ █▀░ █▄█ █▄▄ █ █▄█\n" +
-      "https://github.com/shaansubbaiah/Portfolio"
+    "█▀▀ █▄█ █▀▄ ░█░ █▀░ █▄█ █▄▄ █ █▄█\n" +
+    "https://github.com/shaansubbaiah/Portfolio"
   );
 
   let ch;
