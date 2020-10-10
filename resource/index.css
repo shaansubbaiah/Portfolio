@@ -24,12 +24,12 @@
 }
 
 :root[color-mode="dark"] {
-  --background: #15161a;
-  --background-primary: #202125;
+  --background: #121212;
+  --background-primary: #1d1d1d;
   --text-primary: #ffffff;
   --background-secondary: #00c3ff;
   --text-secondary: #05050f;
-  --background-tertiary: #464a4c;
+  --background-tertiary: #2d2d2d;
   --text-tertiary: #ffffff;
 
   --card-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.3);
