@@ -3,6 +3,7 @@
   --icon-moon-color: #0075ff;
   --highlight-color: #bb86fe;
   --highlight-text: #000000;
+  --image-fallback-color: #bb86fe;
 }
 
 :root[color-mode="light"] {
@@ -418,6 +419,8 @@ a {
 .repo-socialprev-img {
   width: 320px;
   border-radius: 16px;
+  background: var(--image-fallback-color);
+  margin: 5px auto;
 }
 
 .repo-stats {
