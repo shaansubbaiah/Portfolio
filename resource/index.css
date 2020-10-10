@@ -83,19 +83,11 @@ a {
   grid-template-columns: 5% 90% 5%;
   grid-template-rows: auto;
   grid-template-areas:
-    ". sidebar-block ."
-    ". nav-block ."
-    ". repo-block .";
-}
-
-#sidebar-block {
-  grid-area: sidebar-block;
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-areas:
     ". profile-image ."
     ". name-block ."
-    ". profile-info .";
+    ". profile-info ."
+    ". nav-block ."
+    ". repo-block .";
 }
 
 #repo-block {
@@ -111,26 +103,11 @@ a {
   #container {
     display: grid;
     grid-template-columns: 5% 30% 60% 5%;
-    grid-template-rows: 200px auto;
+    grid-template-rows: 200px 400px auto;
     grid-template-areas:
-      ". sidebar-block nav-block ."
-      ". sidebar-block repo-block .";
-  }
-
-  #sidebar-block {
-    grid-area: sidebar-block;
-    display: grid;
-    grid-template-rows: 200px 400px;
-    grid-template-areas:
-      ". name-block ."
-      ". profile-image ."
-      ". profile-info .";
-  }
-
-  #sidebar-block {
-    position: fixed;
-    top: 0;
-    margin-left: 5%;
+      ". name-block nav-block ."
+      ". profile-image repo-block ."
+      ". profile-info repo-block .";
   }
 
   #pf-img-container {
