@@ -1,7 +1,8 @@
 :root {
   --icon-sun-color: #ffd932;
   --icon-moon-color: #0075ff;
-  --highlight-color: #930ae8;
+  --highlight-color: #bb86fe;
+  --highlight-text: #000000;
 }
 
 :root[color-mode="light"] {
@@ -64,12 +65,15 @@ a {
 /* selection color */
 ::-moz-selection {
   background: var(--highlight-color);
+  color: var(--highlight-text);
 }
 ::-webkit-selection {
   background: var(--highlight-color);
+  color: var(--highlight-text);
 }
 ::selection {
   background: var(--highlight-color);
+  color: var(--highlight-text);
 }
 
 /* mobile first */
