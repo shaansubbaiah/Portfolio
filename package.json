@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "v1.6",
+  "version": "1.6.0",
   "description": "Automatically generates a responsive, static-site with the user’s Github projects.",
   "main": "index.js",
   "scripts": {
