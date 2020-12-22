@@ -1,6 +1,6 @@
 :root {
   --icon-sun-color: #ffd932;
-  --icon-moon-color: #0075ff;
+  --icon-moon-color: #0056ff;
   --highlight-color: #bb86fe;
   --highlight-text: #000000;
   --image-fallback-color: #bb86fe;
@@ -10,7 +10,7 @@
   --background: #f3f4f6;
   --background-primary: #ffffff;
   --text-primary: #000000;
-  --background-secondary: #0075ff;
+  --background-secondary: #0056ff;
   --text-secondary: #ffffff;
   --background-tertiary: #f9f9f9;
   --text-tertiary: #333333;
@@ -20,7 +20,7 @@
 
   --icon-star-color: #f7bd00;
   --icon-fork-color: #f80074;
-  --lang-color: #0075ff;
+  --lang-color: #0056ff;
 }
 
 :root[color-mode="dark"] {

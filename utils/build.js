@@ -110,10 +110,12 @@ exports.build = async () => {
         <img
             id="pf-img-source"
             src="${avatarPath}"
+            alt="Profile Avatar"
           />
         <img
             id="pf-img-shadow"
             src="${avatarPath}"
+            alt=""
           />
       `;
 
@@ -265,7 +267,7 @@ exports.build = async () => {
                 ${
                   cfg.socialPreviewImage == "enabled" &&
                   repos[i].usesCustomOpenGraphImage == true
-                    ? `<img class="repo-socialprev-img" src="${repos[i].openGraphImageUrl}">`
+                    ? `<img class="repo-socialprev-img" src="${repos[i].openGraphImageUrl}" alt="${repos[i].name} social preview image">`
                     : ""
                 }
                 ${repos[i].description ? repos[i].description : ""}</span>
