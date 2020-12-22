@@ -454,11 +454,6 @@ a {
   height: auto;
 }
 
-/* remove ugly dotted line in firefox on click */
-.color-mode-btn::-moz-focus-inner {
-  border: 0;
-}
-
 .icon-sun,
 .icon-moon {
   height: 24px;
