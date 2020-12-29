@@ -47,6 +47,6 @@ window.onload = function () {
   msnry.stamp(document.querySelector(".stamp"));
 };
 
-window.onresize = function() {
+window.onresize = function () {
   msnry.stamp(document.querySelector(".stamp"));
 };

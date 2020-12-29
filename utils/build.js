@@ -1,12 +1,13 @@
+const { O_APPEND } = require("constants");
 const fs = require("fs-extra");
 const jsdom = require("jsdom").JSDOM;
 const path = require("path");
 const pretty = require("pretty");
-const md = require('markdown-it')({
-  html:true,
-  breaks:true,
-  linkify:true,
-  typographer:true
+const md = require("markdown-it")({
+  html: true,
+  breaks: true,
+  linkify: true,
+  typographer: true,
 });
 const { getAvatar } = require("./getAvatar");
 const { getData } = require("./getData");
@@ -246,15 +247,19 @@ exports.build = async () => {
 
       e = document.getElementById("repo-grid");
 
-      let mdProfileREADME = md.render(dt.user.repository.object.text); 
+      let mdProfileREADME = md.render(dt.user.repository.object.text);
+      // Append '?raw=true' to images hosted on GitHub
+      mdProfileREADME = mdProfileREADME.replace(
+        /\b(https:\/\/github\.com\/\S+(?:png|jpe?g|gif))\b/gim,
+        "$&" + "?raw=true"
+      );
 
-      if(cfg.profileREADME == 'enabled' &&
-        dt.user.repository != null){
+      if (cfg.profileREADME == "enabled" && dt.user.repository != null) {
         e.innerHTML = `
           <div class="stamp">
             ${mdProfileREADME}
           </div>
-        `
+        `;
       }
 
       const repos = getRepos(
