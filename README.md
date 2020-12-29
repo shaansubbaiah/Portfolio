@@ -1,13 +1,15 @@
 <div align="center">
     <img src="./artwork/logo.png">
     <br>
+    <strong> Automatically generate a beautiful, responsive site to display your GitHub projects. </strong>
+    <br>
     Live demo at <a href="https://shaansubbaiah.github.io">shaansubbaiah.github.io</a>
+    <br>
+    If you find <strong>Portfolio</strong> useful, make sure to 🌟 the repository and <strong>spread the word!</strong>
     <br>
     <img src="./artwork/mobile-screenshot.png" width="693" height="789">
     <br>
     <img src="./artwork/desktop-screenshot.png">
-    <br>
-    If you find <strong>Portfolio</strong> useful, make sure to 🌟 the repository and <strong>spread the word!</strong>
 </div>
 
 ## Getting Started
@@ -61,7 +63,7 @@ Eg. your-username.github.io
 
 **infoLinks**: Object Array - adds additional links in the information section.
 
-    where
+    where,
     name: String - Text to display
     link: String - URL the text links to
 
@@ -70,7 +72,6 @@ Eg. your-username.github.io
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
-
 [![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/0)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/0)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/1)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/1)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/2)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/2)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/3)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/3)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/4)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/4)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/5)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/5)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/6)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/6)[![](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/images/7)](https://sourcerer.io/fame/shaansubbaiah/shaansubbaiah/Portfolio/links/7)
 
 ## Related
