@@ -34,6 +34,7 @@ if (window.CSS && CSS.supports("color", "var(--primary)")) {
 // @SEE https://masonry.desandro.com/
 let msnry = new Masonry(".grid", {
   itemSelector: ".grid-item",
+  stamp: ".stamp",
   gutter: 20,
   horizontalOrder: true,
   columnWidth: 350,
@@ -43,4 +44,9 @@ let msnry = new Masonry(".grid", {
 // Force masonry reload once page is ready to prevent overlap
 window.onload = function () {
   msnry.layout();
+  msnry.stamp(document.querySelector(".stamp"));
+};
+
+window.onresize = function() {
+  msnry.stamp(document.querySelector(".stamp"));
 };
