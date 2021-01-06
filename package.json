@@ -9,7 +9,7 @@
   "author": "Shaan Subbaiah <shaansubbaiah.cs18@bmsce.ac.in>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "fs-extra": "^9.0.1",
     "jsdom": "^16.2.2",
