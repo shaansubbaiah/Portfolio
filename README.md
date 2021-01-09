@@ -5,12 +5,21 @@
     <br>
     Live demo at <a href="https://shaansubbaiah.github.io">shaansubbaiah.github.io</a>
     <br>
-    If you find <strong>Portfolio</strong> useful, make sure to 🌟 the repository and <strong>spread the word!</strong>
+    If you find <strong>Portfolio</strong> useful, make sure to 🌟 the repository!
     <br>
     <img src="./artwork/mobile-screenshot.png" width="693" height="789">
     <br>
     <img src="./artwork/desktop-screenshot.png">
 </div>
+
+## Features
+- Responsive
+- Night Mode
+- Customizable colors, no. of repos, social, links, etc
+- Supports displaying repository social preview images
+- (**WIP**) Display GitHub profile README.md
+- (**TODO**) GitHub Gists support _using iframe embeds_
+- (**TODO**) Blurry/Frosted glass styled repo cards
 
 ## Getting Started
 
