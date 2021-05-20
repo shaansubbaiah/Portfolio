@@ -328,28 +328,9 @@ a {
 
 #readme {
  color: var(--text-primary);
- margin: auto;
+ margin: 0px auto 60px auto;
  max-width: 1000px;
  padding: 10px 20px 20px 20px;
-}
-
-.stamp {
-  /* background: var(--background-primary); */
-  /* max-width: 800px; */
-  color: var(--text-primary);
-
-  border-radius: 28px;
-  /* box-shadow: var(--card-shadow); */
-
-  margin-bottom: 40px;
-  margin-left: 40px;
-  margin-right: 40px;
-  padding: 10px 20px 20px 20px;
-}
-
-.stamp-text {
-  /* max-width: 800px;  */
-  margin: auto;
 }
 
 .grid-item {
@@ -572,10 +553,6 @@ a {
 .stamp {
   transition: all 0.3s ease-in-out;
 }
-
-/* .stamp:hover {
-  transform: scale(1.03);
-} */
 
 .grid-item:hover > .repo-lang {
   /* positioned relatively, top -25px */
