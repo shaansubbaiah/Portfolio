@@ -44,3 +44,7 @@ let msnry = new Masonry(".grid", {
 window.onload = function () {
   msnry.layout();
 };
+
+window.onresize = function () {
+  msnry.layout();
+};

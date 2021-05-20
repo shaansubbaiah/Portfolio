@@ -77,6 +77,14 @@ exports.getData = async () => {
           startCursor
         }
       }
+      # Get GitHub profile readme content
+      repository(name: "${cfg.username}") {
+        object(expression: "master:README.md") {
+          ... on Blob {
+            text
+          }
+        }
+      }
       websiteUrl
       url
       twitterUsername

@@ -113,6 +113,9 @@ async function setConfig() {
     choice = await getChoice(`Display Social Preview Image (Y/n): `);
     cfg.socialPreviewImage = choice == "yes" ? "enabled" : "disabled";
 
+    choice = await getChoice(`Display GitHub Profile README (Y/n): `);
+    cfg.profileREADME = choice == "yes" ? "enabled" : "disabled";
+
     await fs.writeJson("config.json", cfg, { spaces: "\t" });
     const obj = await fs.readJson("config.json", { throws: false });
     console.log("\nConfig written to config.json");
