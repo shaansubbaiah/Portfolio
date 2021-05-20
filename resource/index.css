@@ -102,8 +102,8 @@ a {
 @media only screen and (min-width: 750px) {
   #container {
     display: grid;
-    grid-template-columns: 5% 30% 60% 5%;
-    grid-template-rows: 200px 400px auto;
+    grid-template-columns: minmax(50px, auto) 340px minmax(400px, 1200px) minmax(50px, auto);
+    grid-template-rows: 140px 400px auto;
     grid-template-areas:
       ". name-block     nav-block  ."
       ". profile-image  repo-block ."
@@ -160,6 +160,8 @@ a {
 
   #repo-block {
     margin-top: 120px !important;
+    display: flex;
+    flex-direction: column;
   }
 
   .grid {
@@ -324,17 +326,30 @@ a {
   margin-top: 20px;
 }
 
+#readme {
+ color: var(--text-primary);
+ margin: auto;
+ max-width: 1000px;
+ padding: 10px 20px 20px 20px;
+}
+
 .stamp {
-  background: var(--background-primary);
-  max-width: 800px;
+  /* background: var(--background-primary); */
+  /* max-width: 800px; */
+  color: var(--text-primary);
 
   border-radius: 28px;
-  box-shadow: var(--card-shadow);
+  /* box-shadow: var(--card-shadow); */
 
   margin-bottom: 40px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 40px;
+  margin-right: 40px;
   padding: 10px 20px 20px 20px;
+}
+
+.stamp-text {
+  /* max-width: 800px;  */
+  margin: auto;
 }
 
 .grid-item {
@@ -558,9 +573,9 @@ a {
   transition: all 0.3s ease-in-out;
 }
 
-.stamp:hover {
+/* .stamp:hover {
   transform: scale(1.03);
-}
+} */
 
 .grid-item:hover > .repo-lang {
   /* positioned relatively, top -25px */
