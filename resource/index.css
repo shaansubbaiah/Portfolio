@@ -99,7 +99,7 @@ a {
 }
 
 /* for desktops, >750px  */
-@media only screen and (min-width: 750px) {
+@media only screen and (min-width: 800px) {
   #container {
     display: grid;
     grid-template-columns: minmax(50px, auto) 340px minmax(400px, 1200px) minmax(50px, auto);
