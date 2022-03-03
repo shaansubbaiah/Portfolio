@@ -102,7 +102,10 @@ a {
 @media only screen and (min-width: 800px) {
   #container {
     display: grid;
-    grid-template-columns: minmax(50px, auto) 340px minmax(400px, 1200px) minmax(50px, auto);
+    grid-template-columns: minmax(50px, auto) 340px minmax(400px, 1200px) minmax(
+        50px,
+        auto
+      );
     grid-template-rows: 140px 400px auto;
     grid-template-areas:
       ". name-block     nav-block  ."
@@ -304,9 +307,16 @@ a {
 
 #pf-info-links div {
   margin: 5px 10px;
-
   display: flex;
   flex-direction: row;
+}
+
+#pf-info-links div:hover {
+  color: var(--lang-color);
+}
+
+#pf-info-links div:hover .pf-info-icon {
+  stroke: var(--lang-color);
 }
 
 .pf-info-icon {
@@ -327,10 +337,10 @@ a {
 }
 
 #readme {
- color: var(--text-primary);
- margin: 0px auto 60px auto;
- max-width: 1000px;
- padding: 10px 20px 20px 20px;
+  color: var(--text-primary);
+  margin: 0px auto 60px auto;
+  max-width: 1000px;
+  padding: 10px 20px 20px 20px;
 }
 
 .grid-item {
