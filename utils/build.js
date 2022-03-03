@@ -15,18 +15,30 @@ const options = {
   resources: "usable",
 };
 
+function fixLinksInDescription(description) {
+  // https://stackoverflow.com/a/7331361
+  return description.replace(
+    /(\b(https?|ftp|file):\/\/[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z09+&@#\/%=~_|])/gim,
+    "<a href='$1'>$1</a>"
+  );
+}
+
 function getRepos(x, y) {
   const repos = x.concat(y);
   let uniqueRepos = [repos[0]];
+
   for (let i = 0; i < repos.length; i++) {
     let repoExists = false;
+
     for (let j = 0; j < uniqueRepos.length; j++) {
       if (uniqueRepos[j].id == repos[i].id) {
         repoExists = true;
       }
     }
+
     if (!repoExists) uniqueRepos.push(repos[i]);
   }
+
   return uniqueRepos;
 }
 
@@ -297,7 +309,12 @@ exports.build = async () => {
                     ? `<img class="repo-socialprev-img" src="${repos[i].openGraphImageUrl}" alt="${repos[i].name} social preview image">`
                     : ""
                 }
-                ${repos[i].description ? repos[i].description : ""}</span>
+                ${
+                  repos[i].description
+                    ? fixLinksInDescription(repos[i].description)
+                    : ""
+                }
+                </span>
               </a>
             </div>
             <div class="repo-stats">
