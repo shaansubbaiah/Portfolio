@@ -245,19 +245,24 @@ exports.build = async () => {
         `;
       }
 
-      e = document.getElementById("readme");
-
-      let mdProfileREADME = md.render(dt.user.repository.object.text);
-      // Append '?raw=true' to images hosted on GitHub
-      mdProfileREADME = mdProfileREADME.replace(
-        /\b(https:\/\/github\.com\/\S+(?:png|jpe?g|gif))\b/gim,
-        "$&" + "?raw=true"
-      );
-
       if (cfg.profileREADME == "enabled" && dt.user.repository != null) {
-        e.innerHTML = `
+        e = document.getElementById("repo-block");
+
+        readmeDiv = document.createElement("div");
+        readmeDiv.setAttribute("id", "readme");
+
+        let mdProfileREADME = md.render(dt.user.repository.object.text);
+        // Append '?raw=true' to images hosted on GitHub
+        mdProfileREADME = mdProfileREADME.replace(
+          /\b(https:\/\/github\.com\/\S+(?:png|jpe?g|gif))\b/gim,
+          "$&" + "?raw=true"
+        );
+
+        readmeDiv.innerHTML = `
           ${mdProfileREADME}
         `;
+
+        e.prepend(readmeDiv);
       }
 
       e = document.getElementById("repo-grid");
@@ -270,25 +275,28 @@ exports.build = async () => {
       for (i = 0; i < repos.length; i++) {
         e.innerHTML += `
           <div class="grid-item">
-            ${repos[i].primaryLanguage
-            ? `<div class="repo-lang"><span>${repos[i].primaryLanguage.name}</span></div>`
-            : ""
-          }
+            ${
+              repos[i].primaryLanguage
+                ? `<div class="repo-lang"><span>${repos[i].primaryLanguage.name}</span></div>`
+                : ""
+            }
             <div class="repo-about">
               <a href="${repos[i].url}">
                 <span class="repo-title">
-                  ${repos[i].isFork
-            ? `<svg class="icon-fork"><use xlink:href="assets/svg/svg-defs.svg#fork"></use></svg>`
-            : ""
-          }
+                  ${
+                    repos[i].isFork
+                      ? `<svg class="icon-fork"><use xlink:href="assets/svg/svg-defs.svg#fork"></use></svg>`
+                      : ""
+                  }
                   ${repos[i].name}
                 </span>
                 <span class="repo-desc">
-                ${cfg.socialPreviewImage == "enabled" &&
-            repos[i].usesCustomOpenGraphImage == true
-            ? `<img class="repo-socialprev-img" src="${repos[i].openGraphImageUrl}" alt="${repos[i].name} social preview image">`
-            : ""
-          }
+                ${
+                  cfg.socialPreviewImage == "enabled" &&
+                  repos[i].usesCustomOpenGraphImage == true
+                    ? `<img class="repo-socialprev-img" src="${repos[i].openGraphImageUrl}" alt="${repos[i].name} social preview image">`
+                    : ""
+                }
                 ${repos[i].description ? repos[i].description : ""}</span>
               </a>
             </div>
