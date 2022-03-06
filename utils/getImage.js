@@ -7,7 +7,7 @@ const path = require('path');
  * @param {String} pathOrUrl
  * @return {Promise<Buffer>}
  */
-exports.getAvatar = function (pathOrUrl) {
+exports.getImage = function (pathOrUrl) {
   if (pathOrUrl.startsWith('http')) {
     return axios({
       method: 'get',

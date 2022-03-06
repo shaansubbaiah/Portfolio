@@ -9,7 +9,7 @@ const md = require("markdown-it")({
   linkify: true,
   typographer: true,
 });
-const { getAvatar } = require("./getAvatar");
+const { getImage } = require("./getImage");
 const { getData } = require("./getData");
 const options = {
   resources: "usable",
@@ -53,7 +53,12 @@ exports.build = async () => {
       process.exit(1);
     });
 
-  await getAvatar(cfg.avatar || dt.user.avatarUrl)
+  const repos = getRepos(
+    dt.user.pinnedItems.nodes,
+    dt.user.repositories.nodes
+  );
+
+  await getImage(cfg.avatar || dt.user.avatarUrl)
     .then((buffer) => {
       const ext = cfg.avatar ? path.extname(cfg.avatar).slice(1) : "png";
       return fs.outputFile(`./dist/assets/${ext}/avatar.${ext}`, buffer);
@@ -66,6 +71,21 @@ exports.build = async () => {
       console.error("Error: " + err.message);
       process.exit(1);
     });
+
+  // Get social preview image and store it locally
+  for (i = 0; i < repos.length; i++) {
+    if (cfg.socialPreviewImage == "enabled" &&
+      repos[i].usesCustomOpenGraphImage == true) {
+
+      await getImage(repos[i].openGraphImageUrl)
+        .then((buffer) => {
+          return fs.outputFile(`./dist/assets/png/${repos[i].name}.png`, buffer);
+        })
+        .catch((err) => {
+          console.error(`Error fetching repository social preview image!`);
+        });
+    }
+  }
 
   await fs
     .copy("./resource", "./dist")
@@ -267,11 +287,6 @@ exports.build = async () => {
 
       e = document.getElementById("repo-grid");
 
-      const repos = getRepos(
-        dt.user.pinnedItems.nodes,
-        dt.user.repositories.nodes
-      );
-
       for (i = 0; i < repos.length; i++) {
         e.innerHTML += `
           <div class="grid-item">
@@ -292,12 +307,12 @@ exports.build = async () => {
                 </span>
                 <span class="repo-desc">
                 ${
-                  cfg.socialPreviewImage == "enabled" &&
-                  repos[i].usesCustomOpenGraphImage == true
-                    ? `<img class="repo-socialprev-img" src="${repos[i].openGraphImageUrl}" alt="${repos[i].name} social preview image">`
+                  cfg.socialPreviewImage == "enabled" && repos[i].usesCustomOpenGraphImage == true
+                    ? `<img class="repo-socialprev-img" src="assets/png/${repos[i].name}.png" alt="${repos[i].name} social preview image">`
                     : ""
                 }
-                ${repos[i].description ? repos[i].description : ""}</span>
+                ${repos[i].description ? repos[i].description : ""}
+                </span>
               </a>
             </div>
             <div class="repo-stats">
