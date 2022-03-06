@@ -14,10 +14,10 @@
 
 ## Features
 - Responsive
-- Night Mode
+- Dark Mode
 - Customizable colors, no. of repos, social, links, etc
 - Supports displaying repository social preview images
-- (**WIP**) Display GitHub profile README.md
+- Display GitHub profile README.md
 - (**TODO**) GitHub Gists support _using iframe embeds_
 - (**TODO**) Blurry/Frosted glass styled repo cards
 
