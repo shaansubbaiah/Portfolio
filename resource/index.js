@@ -48,3 +48,39 @@ window.onload = function () {
 window.onresize = function () {
   msnry.layout();
 };
+
+// Handle avatar click animation
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+let avatarClickCount = 0;
+document.getElementById("pf-img-source").onclick = function avatarClick() {
+  avatarClickCount += 1;
+  if (avatarClickCount == 3) {
+    // @SEE github.com/catdad/canvas-confetti
+    confetti({
+      particleCount: 100,
+      startVelocity: 30,
+      spread: 360,
+      origin: {
+        x: getRandomArbitrary(0.2, 0.8),
+        y: getRandomArbitrary(0.1, 0.6),
+      },
+    });
+    confetti({
+      particleCount: 20,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+    });
+    confetti({
+      particleCount: 20,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+    });
+    console.log("Ahah! 🥚🐇🎊");
+    avatarClickCount = 0;
+  }
+};
