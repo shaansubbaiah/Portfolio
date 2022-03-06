@@ -1,9 +1,9 @@
 :root {
   --icon-sun-color: #ffd932;
   --icon-moon-color: #0056ff;
-  --highlight-color: #bb86fe;
+  --highlight-color: #d2aeff;
   --highlight-text: #000000;
-  --image-fallback-color: #bb86fe;
+  --image-fallback-color: #d2aeff;
 }
 
 :root[color-mode="light"] {
