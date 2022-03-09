@@ -14,6 +14,7 @@ const { getData } = require("./getData");
 const options = {
   resources: "usable",
 };
+const sharp = require('sharp');
 
 function getRepos(x, y) {
   const repos = x.concat(y);
@@ -58,32 +59,39 @@ exports.build = async () => {
     dt.user.repositories.nodes
   );
 
-  await getImage(cfg.avatar || dt.user.avatarUrl)
-    .then((buffer) => {
-      const ext = cfg.avatar ? path.extname(cfg.avatar).slice(1) : "png";
-      return fs.outputFile(`./dist/assets/${ext}/avatar.${ext}`, buffer);
-    })
-    .then(() => {
-      console.log("✔️ Copied avatar");
-    })
-    .catch((err) => {
-      console.log("⚠️ Failed!");
-      console.error("Error: " + err.message);
-      process.exit(1);
+  await fs.mkdir(path.join(__dirname, "..", "dist", "assets", "images"), {recursive: true});
+  
+  try{
+    let avatarBuffer = await getImage(cfg.avatar || dt.user.avatarUrl)
+    await sharp(avatarBuffer).toFile("./dist/assets/images/avatar.webp", (err) => {
+      if (err) console.log("Error: " + err);
     });
+    console.log("✔️ Copied avatar");
+  }
+  catch(err){
+    console.log("⚠️ Failed!");
+    console.error("Error: " + err.message);
+    process.exit(1);
+  }  
 
   // Get social preview image and store it locally
   for (i = 0; i < repos.length; i++) {
     if (cfg.socialPreviewImage == "enabled" &&
       repos[i].usesCustomOpenGraphImage == true) {
+      
+      try{
+        let imageBuffer = await getImage(repos[i].openGraphImageUrl);
+        await sharp(imageBuffer).toFile(
+          `./dist/assets/images/${repos[i].name}.webp`,
+          (err, info) => {
+            if (err) console.log("Error: " + err);
+          }
+        );
 
-      await getImage(repos[i].openGraphImageUrl)
-        .then((buffer) => {
-          return fs.outputFile(`./dist/assets/png/${repos[i].name}.png`, buffer);
-        })
-        .catch((err) => {
-          console.error(`Error fetching repository social preview image!`);
-        });
+      }
+      catch(err){
+        console.error(`Error fetching repository ${repos[i].name} social preview image!`);
+      }
     }
   }
 
@@ -106,8 +114,7 @@ exports.build = async () => {
 
       document.title = dt.user.name ? dt.user.name : cfg.username;
 
-      const avatarExt = cfg.avatar ? path.extname(cfg.avatar).slice(1) : "png";
-      const avatarPath = `assets/${avatarExt}/avatar.${avatarExt}`;
+      const avatarPath = `assets/images/avatar.webp`;
       document.head.innerHTML += `
         <link rel="icon" href="${avatarPath}">
       `;
@@ -308,7 +315,7 @@ exports.build = async () => {
                 <span class="repo-desc">
                 ${
                   cfg.socialPreviewImage == "enabled" && repos[i].usesCustomOpenGraphImage == true
-                    ? `<img class="repo-socialprev-img" src="assets/png/${repos[i].name}.png" alt="${repos[i].name} social preview image">`
+                    ? `<img class="repo-socialprev-img" src="assets/images/${repos[i].name}.webp" alt="${repos[i].name} social preview image">`
                     : ""
                 }
                 ${repos[i].description ? repos[i].description : ""}
