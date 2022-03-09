@@ -117,6 +117,7 @@ exports.build = async () => {
       const avatarPath = `assets/images/avatar.webp`;
       document.head.innerHTML += `
         <link rel="icon" href="${avatarPath}">
+        <meta name="description" content="${dt.user.name}\'s portfolio website showcasing GitHub projects.">
       `;
 
       let e;
@@ -315,7 +316,10 @@ exports.build = async () => {
                 <span class="repo-desc">
                 ${
                   cfg.socialPreviewImage == "enabled" && repos[i].usesCustomOpenGraphImage == true
-                    ? `<img class="repo-socialprev-img" src="assets/images/${repos[i].name}.webp" alt="${repos[i].name} social preview image">`
+                    ? `<img class="repo-socialprev-img"
+                        src="assets/images/${repos[i].name}.webp"
+                        alt="${repos[i].name} social preview image"
+                        width="320" height="160">`
                     : ""
                 }
                 ${repos[i].description ? repos[i].description : ""}
