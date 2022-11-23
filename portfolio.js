@@ -2,9 +2,9 @@ import inquirer from "inquirer";
 import fs from "fs-extra";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getData } from "./utils/getData.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function setConfig() {
   let cfg = {};
@@ -109,6 +109,7 @@ async function setConfig() {
     message: "Add navigation links (top right of page)?",
     default: false,
   });
+
   if (addNavInquiry.addNavLinks) {
     await inquireLink("navLink");
   }
@@ -147,9 +148,9 @@ async function setToken() {
 
 async function portfolio() {
   console.log(
-    "" +
-      "█▀█ █▀█ █▀█ ▀█▀ █▀▀ █▀█ █░░ █ █▀█\n" +
-      "█▀▀ █▄█ █▀▄ ░█░ █▀░ █▄█ █▄▄ █ █▄█\n" +
+    "\n" +
+      "    █▀█ █▀█ █▀█ ▀█▀ █▀▀ █▀█ █░░ █ █▀█\n" +
+      "    █▀▀ █▄█ █▀▄ ░█░ █▀░ █▄█ █▄▄ █ █▄█\n" +
       "https://github.com/shaansubbaiah/Portfolio\n"
   );
 
@@ -164,11 +165,15 @@ async function portfolio() {
       "Exit",
     ],
   });
-  if (choice.action === "Set Github Token") await setToken();
-  else if (choice.action === "Set configuration options") await setConfig();
-  else if (choice.action === "Build Portfolio")
-    console.log("~ gestures like its building ~");
-  else process.exit(0);
+  if (choice.action === "Set Github Token") {
+    await setToken();
+  } else if (choice.action === "Set configuration options") {
+    await setConfig();
+  } else if (choice.action === "Build Portfolio") {
+    await getData();
+  } else {
+    process.exit(0);
+  }
 }
 
 portfolio();
