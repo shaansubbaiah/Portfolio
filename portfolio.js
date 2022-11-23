@@ -1,163 +1,174 @@
-const fs = require("fs-extra");
-const readline = require("readline");
-const path = require("path");
-const { build } = require("./utils/build");
+import inquirer from "inquirer";
+import fs from "fs-extra";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-// helper function to handle async readline functions
-// @SEE: https://stackoverflow.com/a/57416896
-function question(theQuestion, defaultValue) {
-  return new Promise((resolve) => {
-    rl.question(theQuestion, (ans) => resolve(ans));
-    if (defaultValue) {
-      rl.write(defaultValue);
-    }
-  });
-}
-
-function getChoice(theQuestion) {
-  return new Promise((resolve) =>
-    rl.question(theQuestion, (ans) => {
-      if (ans.toLowerCase() == "y" || ans.toLowerCase() == "yes") {
-        resolve("yes");
-      } else if (ans.toLowerCase() == "n" || ans.toLowerCase() == "no") {
-        resolve("no");
-      } else {
-        resolve("invalid");
-      }
-    })
-  );
-}
-
-async function setToken() {
-  try {
-    const token = await question(
-      "\n// Github token should have at least public_repo, read:user permissions\n" +
-      "// A token can be created at https://github.com/settings/tokens/new .\n" +
-      "Github token: "
-    );
-    await fs.outputFile(`./.env`, `GITHUB_TOKEN="${token}"`);
-    console.log(`🎉 Token Set!`);
-  } catch (err) {
-    console.error(err);
-  }
-  return;
-}
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function setConfig() {
   let cfg = {};
 
-  try {
-    const exists = await fs.existsSync(path.join(__dirname, "config.json"));
-
-    if (exists) {
-      cfg = await fs.readJson("config.json", { throws: false });
-    }
-
-    data = await question("\nGitHub username: ", cfg.username);
-    cfg.username = data ? data : null;
-
-    data = await question("No. of repositories: ", cfg.repos);
-    cfg.repos = data ? data : null;
-
-    data = await question("Avatar path or url: ", cfg.avatar);
-    cfg.avatar = data ? data : null;
-
-    data = await question("Linkedin URL: ", cfg.linkedinURL);
-    cfg.linkedinURL = data ? data : null;
-
-    data = await question("Twitter ID: ", cfg.twitterId);
-    cfg.twitterId = data ? data : null;
-
-    data = await question("GitLab username: ", cfg.gitlabId);
-    cfg.gitlabId = data ? data : null;
-
-    let choice, i;
-
-    cfg.navLinks = [];
-    i = 0;
-    console.log("Add Navigation links: (don't exceed 3)");
-    do {
-      choice = await getChoice(`  Link ${i} (Y/n): `);
-      if (choice == "yes") {
-        let obj = {};
-        obj.name = await question("    Display name: ");
-        obj.link = await question("    Link: ");
-        cfg.navLinks[i] = obj;
-        i++;
-      } else if (choice == "no") {
-        break;
-      }
-    } while (choice != "no");
-
-    cfg.infoLinks = [];
-    i = 0;
-    console.log("Add Information links: (don't exceed 4)");
-    do {
-      choice = await getChoice(`  Link ${i} (Y/n): `);
-      if (choice == "yes") {
-        let obj = {};
-        obj.name = await question("    Display name: ");
-        obj.link = await question("    Link: ");
-        cfg.infoLinks[i] = obj;
-        i++;
-      } else if (choice == "no") {
-        break;
-      }
-    } while (choice != "no");
-
-    choice = await getChoice(`Display Social Preview Image (Y/n): `);
-    cfg.socialPreviewImage = choice == "yes" ? "enabled" : "disabled";
-
-    choice = await getChoice(`Display GitHub Profile README (Y/n): `);
-    cfg.profileREADME = choice == "yes" ? "enabled" : "disabled";
-
-    await fs.writeJson("config.json", cfg, { spaces: "\t" });
-    const obj = await fs.readJson("config.json", { throws: false });
-    console.log("\nConfig written to config.json");
-    console.log(obj); // => null
-
-    console.log("🎉 Config set!");
-  } catch (err) {
-    console.error(err);
-    rl.close();
+  const exists = fs.existsSync(path.join(__dirname, "config.json"));
+  if (exists) {
+    cfg = await fs.readJson("config.json", { throws: false });
   }
 
-  return;
+  const config = await inquirer.prompt([
+    {
+      type: "input",
+      name: "username",
+      message: "GitHub username?",
+      default: cfg.username || "",
+    },
+    {
+      type: "input",
+      name: "repos",
+      message: "No. of repositories?",
+      default: cfg.repos || "",
+      filter: Number,
+    },
+    {
+      type: "input",
+      name: "avatar",
+      message: "Avatar path or url?",
+      default: cfg.avatar || "",
+    },
+    {
+      type: "input",
+      name: "linkedinURL",
+      message: "LinkedIn url?",
+      default: cfg.linkedinURL || "",
+    },
+    {
+      type: "input",
+      name: "twitterId",
+      message: "Twitter ID?",
+      default: cfg.twitterId || "",
+    },
+    {
+      type: "input",
+      name: "gitlabId",
+      message: "GitLab username?",
+      default: cfg.gitlabId || "",
+    },
+    {
+      type: "confirm",
+      name: "socialPreviewImage",
+      message: "Display social preview images? (default - yes)",
+      default: true,
+    },
+    {
+      type: "confirm",
+      name: "profileREADME",
+      message: "Display profile readme? (default - no)",
+      default: false,
+    },
+  ]);
+
+  cfg = JSON.parse(JSON.stringify(config));
+
+  cfg.navLinks = [];
+  cfg.infoLinks = [];
+
+  async function inquireLink(type) {
+    const linkInquiry = await inquirer.prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "-- Link name?",
+        default: "",
+      },
+      {
+        type: "input",
+        name: "link",
+        message: "-- Link url?",
+        default: "",
+      },
+      {
+        type: "confirm",
+        name: "addMore",
+        message: "Want to add another?",
+        default: false,
+      },
+    ]);
+
+    if (type === "navLink")
+      cfg.navLinks.push({ name: linkInquiry.name, link: linkInquiry.link });
+    else if (type === "infoLink")
+      cfg.infoLinks.push({ name: linkInquiry.name, link: linkInquiry.link });
+
+    if (linkInquiry.addMore) {
+      await inquireLink(type);
+    }
+  }
+
+  const addNavInquiry = await inquirer.prompt({
+    type: "confirm",
+    name: "addNavLinks",
+    message: "Add navigation links (top right of page)?",
+    default: false,
+  });
+  if (addNavInquiry.addNavLinks) {
+    await inquireLink("navLink");
+  }
+
+  const addInfoInquiry = await inquirer.prompt({
+    type: "confirm",
+    name: "addInfoLinks",
+    message: "Add information links (under avatar)?",
+    default: false,
+  });
+
+  if (addInfoInquiry.addInfoLinks) {
+    await inquireLink("infoLink");
+  }
+
+  await fs.writeJson("config.json", cfg, { spaces: "\t" });
+  const obj = await fs.readJson("config.json", { throws: false });
+  console.log("\nConfig written to config.json");
+  console.log(obj);
+
+  console.log("Config set!");
+}
+
+async function setToken() {
+  // ui.updateBottomBar(
+  //   "Github token should have at least public_repo, read:user permissions. A token can be created at https://github.com/settings/tokens/new ."
+  // );
+  const answer = await inquirer.prompt({
+    type: "password",
+    name: "token",
+    message: "Enter GitHub token:",
+    mask: "*",
+  });
+  await fs.outputFile(`./.env`, `GITHUB_TOKEN="${answer.token}"`);
 }
 
 async function portfolio() {
   console.log(
-    "█▀█ █▀█ █▀█ ▀█▀ █▀▀ █▀█ █░░ █ █▀█\n" +
-    "█▀▀ █▄█ █▀▄ ░█░ █▀░ █▄█ █▄▄ █ █▄█\n" +
-    "https://github.com/shaansubbaiah/Portfolio"
+    "" +
+      "█▀█ █▀█ █▀█ ▀█▀ █▀▀ █▀█ █░░ █ █▀█\n" +
+      "█▀▀ █▄█ █▀▄ ░█░ █▀░ █▄█ █▄▄ █ █▄█\n" +
+      "https://github.com/shaansubbaiah/Portfolio\n"
   );
 
-  let ch;
-  do {
-    ch = await question(
-      "\n1. Set Github Token \n2. Set configuration options \n3. Build Portfolio \n4. Exit \nChoice: "
-    );
-    switch (ch) {
-      case "1":
-        await setToken();
-        break;
-      case "2":
-        await setConfig();
-        break;
-      case "3":
-        await build();
-      case "4":
-        rl.close();
-        break;
-      default:
-        console.log("Invalid choice.");
-    }
-  } while (ch != "3" && ch != "4");
+  const choice = await inquirer.prompt({
+    type: "list",
+    name: "action",
+    message: "What would you like to do?",
+    choices: [
+      "Set Github Token",
+      "Set configuration options",
+      "Build Portfolio",
+      "Exit",
+    ],
+  });
+  if (choice.action === "Set Github Token") await setToken();
+  else if (choice.action === "Set configuration options") await setConfig();
+  else if (choice.action === "Build Portfolio")
+    console.log("~ gestures like its building ~");
+  else process.exit(0);
 }
 
 portfolio();
