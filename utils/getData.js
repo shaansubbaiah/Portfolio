@@ -43,7 +43,7 @@ function getRepos(x, y) {
   return uniqueRepos;
 }
 
-async function downloadImages(data) {
+async function downloadImages(data, repos) {
   let cfg;
   try {
     cfg = await fs.readJson(path.join(__dirname, "..", "config.json"), {
@@ -52,11 +52,6 @@ async function downloadImages(data) {
   } catch (err) {
     console.error(err);
   }
-
-  const repos = getRepos(
-    data.user.pinnedItems.nodes,
-    data.user.repositories.nodes
-  );
 
   await fs.mkdir(path.join(__dirname, "..", "dist", "assets", "images"), {
     recursive: true,
@@ -223,12 +218,19 @@ async function getGithubData() {
 
   // Axios returns an object with 'data' parameter
   // Github API returns an object with 'data', 'error'
-  return graphdata.data.data;
+  const data = graphdata.data.data;
+
+  const repos = getRepos(
+    data.user.pinnedItems.nodes,
+    data.user.repositories.nodes
+  );
+
+  return [data, repos];
 }
 
 export async function getData() {
   console.log("Fetching data from GitHub");
-  const data = await getGithubData();
+  const [data, repos] = await getGithubData();
 
   console.log("Writing data to " + DATA_EXPORT_FILENAME);
   await fs.writeJson(DATA_EXPORT_FILENAME, data, {
@@ -236,5 +238,7 @@ export async function getData() {
   });
 
   console.log("Downloading images from GitHub");
-  await downloadImages(data);
+  await downloadImages(data, repos);
+
+  return [data, repos];
 }

@@ -1,39 +1,23 @@
-const { O_APPEND } = require("constants");
-const fs = require("fs-extra");
-const jsdom = require("jsdom").JSDOM;
-const path = require("path");
-const pretty = require("pretty");
-const md = require("markdown-it")({
+import fs from "fs-extra";
+import path from "path";
+import jsdom from "jsdom";
+import pretty from "pretty";
+import { getData } from "./getData.js";
+import { fileURLToPath } from "url";
+import markdownit from "markdown-it";
+
+const md = markdownit({
   html: true,
   breaks: true,
   linkify: true,
   typographer: true,
 });
-const { getImage } = require("./getImage");
-const { getData } = require("./getData");
-const options = {
-  resources: "usable",
-};
-const sharp = require('sharp');
 
-function getRepos(x, y) {
-  const repos = x.concat(y);
-  let uniqueRepos = [repos[0]];
-  for (let i = 0; i < repos.length; i++) {
-    let repoExists = false;
-    for (let j = 0; j < uniqueRepos.length; j++) {
-      if (uniqueRepos[j].id == repos[i].id) {
-        repoExists = true;
-      }
-    }
-    if (!repoExists) uniqueRepos.push(repos[i]);
-  }
-  return uniqueRepos;
-}
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-exports.build = async () => {
+export async function build() {
   console.log("\nStarting Build");
-  let dt, cfg;
+  let dt, repos, cfg;
 
   try {
     cfg = await fs.readJson(path.join(__dirname, "..", "config.json"), {
@@ -43,57 +27,13 @@ exports.build = async () => {
     console.error(err);
   }
 
-  await getData()
-    .then((data) => {
-      dt = data;
-      console.log("✔️ Fetched data from Github");
-    })
-    .catch((err) => {
-      console.log("⚠️ Failed!");
-      console.error("Error: " + err.message);
-      process.exit(1);
-    });
-
-  const repos = getRepos(
-    dt.user.pinnedItems.nodes,
-    dt.user.repositories.nodes
-  );
-
-  await fs.mkdir(path.join(__dirname, "..", "dist", "assets", "images"), {recursive: true});
-  
-  try{
-    let avatarBuffer = await getImage(cfg.avatar || dt.user.avatarUrl)
-    await sharp(avatarBuffer).toFile("./dist/assets/images/avatar.webp", (err) => {
-      if (err) console.log("Error: " + err);
-    });
-    console.log("✔️ Copied avatar");
-  }
-  catch(err){
-    console.log("⚠️ Failed!");
+  try {
+    [dt, repos] = await getData();
+  } catch (err) {
     console.error("Error: " + err.message);
     process.exit(1);
-  }  
-
-  // Get social preview image and store it locally
-  for (i = 0; i < repos.length; i++) {
-    if (cfg.socialPreviewImage == "enabled" &&
-      repos[i].usesCustomOpenGraphImage == true) {
-      
-      try{
-        let imageBuffer = await getImage(repos[i].openGraphImageUrl);
-        await sharp(imageBuffer).toFile(
-          `./dist/assets/images/${repos[i].name}.webp`,
-          (err, info) => {
-            if (err) console.log("Error: " + err);
-          }
-        );
-
-      }
-      catch(err){
-        console.error(`Error fetching repository ${repos[i].name} social preview image!`);
-      }
-    }
   }
+  console.log("✔️ Fetched data from Github");
 
   await fs
     .copy("./resource", "./dist")
@@ -106,8 +46,9 @@ exports.build = async () => {
       process.exit(1);
     });
 
-  jsdom
-    .fromFile(path.join(__dirname, "..", "resource", "index.html"), options)
+  jsdom.JSDOM.fromFile(path.join(__dirname, "..", "resource", "index.html"), {
+    resources: "usable",
+  })
     .then((dom) => {
       let window = dom.window,
         document = window.document;
@@ -295,7 +236,7 @@ exports.build = async () => {
 
       e = document.getElementById("repo-grid");
 
-      for (i = 0; i < repos.length; i++) {
+      for (let i = 0; i < repos.length; i++) {
         e.innerHTML += `
           <div class="grid-item">
             ${
@@ -315,7 +256,8 @@ exports.build = async () => {
                 </span>
                 <span class="repo-desc">
                 ${
-                  cfg.socialPreviewImage == "enabled" && repos[i].usesCustomOpenGraphImage == true
+                  cfg.socialPreviewImage == "enabled" &&
+                  repos[i].usesCustomOpenGraphImage == true
                     ? `<img class="repo-socialprev-img"
                         src="assets/images/${repos[i].name}.webp"
                         alt="${repos[i].name} social preview image"
@@ -362,4 +304,4 @@ exports.build = async () => {
     });
 
   return;
-};
+}

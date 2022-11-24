@@ -2,7 +2,7 @@ import inquirer from "inquirer";
 import fs from "fs-extra";
 import path from "path";
 import { fileURLToPath } from "url";
-import { getData } from "./utils/getData.js";
+import { build } from "./utils/build.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -170,7 +170,7 @@ async function portfolio() {
   } else if (choice.action === "Set configuration options") {
     await setConfig();
   } else if (choice.action === "Build Portfolio") {
-    await getData();
+    await build();
   } else {
     process.exit(0);
   }
