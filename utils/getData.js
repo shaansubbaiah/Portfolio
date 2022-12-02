@@ -75,7 +75,7 @@ async function downloadImages(data, repos) {
   // Get social preview image and store it locally
   for (let i = 0; i < repos.length; i++) {
     if (
-      cfg.socialPreviewImage == "enabled" &&
+      cfg.socialPreviewImage == true &&
       repos[i].usesCustomOpenGraphImage == true
     ) {
       try {

@@ -214,7 +214,7 @@ export async function build() {
         `;
       }
 
-      if (cfg.profileREADME == "enabled" && dt.user.repository != null) {
+      if (cfg.profileREADME == true && dt.user.repository != null) {
         e = document.getElementById("repo-block");
 
         readmeDiv = document.createElement("div");
@@ -256,7 +256,7 @@ export async function build() {
                 </span>
                 <span class="repo-desc">
                 ${
-                  cfg.socialPreviewImage == "enabled" &&
+                  cfg.socialPreviewImage == true &&
                   repos[i].usesCustomOpenGraphImage == true
                     ? `<img class="repo-socialprev-img"
                         src="assets/images/${repos[i].name}.webp"
