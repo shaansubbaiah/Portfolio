@@ -17,7 +17,7 @@
     "dotenv": "^8.2.0",
     "fs-extra": "^9.0.1",
     "inquirer": "^9.1.4",
-    "jsdom": "^16.2.2",
+    "jsdom": "^16.5.0",
     "markdown-it": "^12.3.2",
     "pretty": "^2.0.0",
     "sharp": "^0.30.2"
