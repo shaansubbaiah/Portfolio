@@ -1,3 +1,4 @@
+public/images/*
 node_modules
 dist
 config.json

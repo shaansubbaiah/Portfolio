@@ -3,10 +3,13 @@ import dotenv from "dotenv";
 import fs from "fs-extra";
 import path from "path";
 import sharp from "sharp";
+import markdownit from "markdown-it";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DATA_EXPORT_FILENAME = "github-data.json";
+const GITHUB_DATA_EXPORT_PATH = path.join(__dirname, "..", "github-data.json");
+const CONFIG_PATH = path.join(__dirname, "..", "config.json");
+const IMAGE_EXPORT_PATH = path.join(__dirname, "..", "public", "images");
 
 /**
  * Try to get a buffer for the avatar.
@@ -28,6 +31,24 @@ async function getImage(pathOrUrl) {
   }
 }
 
+function renderREADME() {
+  const md = markdownit({
+    html: true,
+    breaks: true,
+    linkify: true,
+    typographer: true,
+  });
+
+  let mdProfileREADME = md.render(dt.user.repository.object.text);
+  // Append '?raw=true' to images hosted on GitHub
+  mdProfileREADME = mdProfileREADME.replace(
+    /\b(https:\/\/github\.com\/\S+(?:png|jpe?g|gif))\b/gim,
+    "$&" + "?raw=true"
+  );
+
+  return mdProfileREADME;
+}
+
 function getRepos(x, y) {
   const repos = x.concat(y);
   let uniqueRepos = [repos[0]];
@@ -43,36 +64,35 @@ function getRepos(x, y) {
   return uniqueRepos;
 }
 
-async function downloadImages(data, repos) {
+async function downloadImages(data) {
   let cfg;
   try {
-    cfg = await fs.readJson(path.join(__dirname, "..", "config.json"), {
-      throws: false,
-    });
+    cfg = await fs.readJson(CONFIG_PATH, { throws: false });
   } catch (err) {
     console.error(err);
   }
 
-  await fs.mkdir(path.join(__dirname, "..", "dist", "assets", "images"), {
+  await fs.mkdir(IMAGE_EXPORT_PATH, {
     recursive: true,
   });
 
   try {
     let avatarBuffer = await getImage(cfg.avatar || data.user.avatarUrl);
     await sharp(avatarBuffer).toFile(
-      "./dist/assets/images/avatar.webp",
+      path.join(IMAGE_EXPORT_PATH, "avatar.webp"),
       (err) => {
         if (err) console.log("Error: " + err);
       }
     );
-    console.log("-- Downloaded avatar");
   } catch (err) {
     console.log("Failed!");
     console.error("Error: " + err.message);
     process.exit(1);
   }
+  console.log("-- Downloaded avatar");
 
   // Get social preview image and store it locally
+  const repos = data.user.uniqueRepositories;
   for (let i = 0; i < repos.length; i++) {
     if (
       cfg.socialPreviewImage == true &&
@@ -81,7 +101,7 @@ async function downloadImages(data, repos) {
       try {
         let imageBuffer = await getImage(repos[i].openGraphImageUrl);
         await sharp(imageBuffer).toFile(
-          `./dist/assets/images/${repos[i].name}.webp`,
+          path.join(IMAGE_EXPORT_PATH, `${repos[i].name}.webp`),
           (err, info) => {
             if (err) console.log("Error: " + err);
           }
@@ -102,9 +122,7 @@ async function getGithubData() {
 
   let cfg;
   try {
-    cfg = await fs.readJson(path.join(__dirname, "..", "config.json"), {
-      throws: false,
-    });
+    cfg = await fs.readJson(CONFIG_PATH, { throws: false });
   } catch (err) {
     console.error(err);
   }
@@ -225,20 +243,25 @@ async function getGithubData() {
     data.user.repositories.nodes
   );
 
-  return [data, repos];
+  data.user.uniqueRepositories = repos;
+
+  if (cfg.profileREADME && user.repository.object.text)
+    data.renderedReadme = renderREADME();
+
+  return data;
 }
 
 export async function getData() {
   console.log("Fetching data from GitHub");
-  const [data, repos] = await getGithubData();
+  const data = await getGithubData();
 
-  console.log("Writing data to " + DATA_EXPORT_FILENAME);
-  await fs.writeJson(DATA_EXPORT_FILENAME, data, {
+  console.log("Writing data to " + GITHUB_DATA_EXPORT_PATH);
+  await fs.writeJson(GITHUB_DATA_EXPORT_PATH, data, {
     spaces: "\t",
   });
 
   console.log("Downloading images from GitHub");
-  await downloadImages(data, repos);
+  await downloadImages(data);
 
-  return [data, repos];
+  return data;
 }

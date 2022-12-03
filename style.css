@@ -68,10 +68,12 @@ a {
   background: var(--highlight-color);
   color: var(--highlight-text);
 }
+
 ::-webkit-selection {
   background: var(--highlight-color);
   color: var(--highlight-text);
 }
+
 ::selection {
   background: var(--highlight-color);
   color: var(--highlight-text);
@@ -102,10 +104,8 @@ a {
 @media only screen and (min-width: 800px) {
   #container {
     display: grid;
-    grid-template-columns: minmax(50px, auto) 340px minmax(400px, 1200px) minmax(
-        50px,
-        auto
-      );
+    grid-template-columns: minmax(50px, auto) 340px minmax(400px, 1200px) minmax(50px,
+        auto);
     grid-template-rows: 140px 400px auto;
     grid-template-areas:
       ". name-block     nav-block  ."
@@ -544,12 +544,12 @@ a {
   transition: all 0.3s ease-in-out;
 }
 
-#pf-img-container:hover > #pf-img-source {
+#pf-img-container:hover>#pf-img-source {
   /* positioned relatively, top -20px */
   top: -28px;
 }
 
-#pf-img-container:hover > #pf-img-shadow {
+#pf-img-container:hover>#pf-img-shadow {
   /* positioned relatively, top -145px */
   top: 142px;
   opacity: 0.45;
@@ -564,16 +564,16 @@ a {
   transition: all 0.3s ease-in-out;
 }
 
-.grid-item:hover > .repo-lang {
+.grid-item:hover>.repo-lang {
   /* positioned relatively, top -25px */
   top: -32px;
 }
 
-.grid-item:hover > .repo-about {
+.grid-item:hover>.repo-about {
   transform: scale(1.03);
 }
 
-.grid-item:hover > .repo-stats {
+.grid-item:hover>.repo-stats {
   /* positioned relatively, bottom -25px */
   bottom: -32px;
 }

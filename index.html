@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html color-mode="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      {{#if dt.user.name}} {{dt.user.name}} {{else}} {{cfg.username}} {{/if}}
+    </title>
+    <script>
+      if (
+        localStorage.getItem("color-mode") === "dark" ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches &&
+          !localStorage.getItem("color-mode"))
+      ) {
+        document.documentElement.setAttribute("color-mode", "dark");
+      }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+    <link rel="icon" href="/images/avatar.webp" />
+    <meta
+      name="description"
+      content="{{dt.user.name}}'s portfolio website showcasing GitHub projects."
+    />
+  </head>
+
+  <body>
+    <div id="container">
+      <!-- Dark Mode Toggle  -->
+      <div class="color-mode-toggle">
+        <button
+          class="color-mode-btn light--hidden"
+          aria-label="Toggle light mode"
+        >
+          <svg class="icon-sun">
+            <use xlink:href="/svg/svg-defs.svg#sun" />
+          </svg>
+        </button>
+        <button
+          class="color-mode-btn dark--hidden"
+          aria-label="Toggle dark mode"
+        >
+          <svg class="icon-moon">
+            <use xlink:href="/svg/svg-defs.svg#moon" />
+          </svg>
+        </button>
+      </div>
+      <!-- 
+        Name Block
+        -->
+      <div id="name-block">
+        {{#if dt.user.name}} {{dt.user.name}} {{else}} {{dt.user.login}} {{/if}}
+      </div>
+      <!-- 
+        Navigation Block
+        -->
+      <div id="nav-block">
+        {{#each cfg.navLinks}}
+        <span id="{{this.name}}">
+          <a href="{{this.link}}"> {{this.name}} </a>
+        </span>
+        {{/each}}
+        <span id="projects" class="nav-selected"> Projects </span>
+      </div>
+      <!-- 
+        Profile Block
+        -->
+      <div id="pf-img-container">
+        <img
+          id="pf-img-source"
+          src="/images/avatar.webp"
+          alt="Profile Avatar"
+        />
+        <img
+          id="pf-img-shadow"
+          src="/images/avatar.webp"
+          alt="Profile Avatar Shadow"
+        />
+      </div>
+      <div id="pf-info-container">
+        {{#if dt.user.bioHTML}}
+        <div id="pf-info-bio">{{dt.user.bioHTML}}</div>
+        {{/if}}
+
+        <div id="pf-info-links">
+          <!-- Github, Location, Company, LinkedIn, Twitter info goes here -->
+          <div id="pf-info-github">
+            <svg class="pf-info-icon icon-f">
+              <use xlink:href="/svg/svg-defs.svg#github" />
+            </svg>
+            <a target="_blank" href="{{dt.user.url}}">
+              <span>{{dt.user.login}}</span>
+            </a>
+          </div>
+          {{#if dt.user.location}}
+          <div id="pf-info-location">
+            <svg class="pf-info-icon icon-f">
+              <use xlink:href="/svg/svg-defs.svg#map-pin" />
+            </svg>
+            <span>{{dt.user.location}}</span>
+          </div>
+          {{/if}} {{#if dt.user.company}}
+          <div id="pf-info-company">
+            <svg class="pf-info-icon icon-f">
+              <use xlink:href="/svg/svg-defs.svg#users" />
+            </svg>
+            <span>{{dt.user.company}}</span>
+          </div>
+          {{/if}} {{#if cfg.linkedinURL}}
+          <div id="pf-info-linkedin">
+            <svg class="pf-info-icon icon-f">
+              <use xlink:href="/svg/svg-defs.svg#linkedin" />
+            </svg>
+            <a target="_blank" href="{{cfg.linkedinURL}}">
+              <span>{{dt.user.name}}</span>
+            </a>
+          </div>
+          {{/if}} {{#if cfg.twitterId}}
+          <div id="pf-info-twitter">
+            <svg class="pf-info-icon icon-f">
+              <use xlink:href="/svg/svg-defs.svg#twitter" />
+            </svg>
+            <a target="_blank" href="https://twitter.com/{{cfg.twitterId}}">
+              <span>{{cfg.twitterId}}</span>
+            </a>
+          </div>
+          {{else if dt.user.twitterUsername}}
+          <div id="pf-info-twitter">
+            <svg class="pf-info-icon icon-f">
+              <use xlink:href="/svg/svg-defs.svg#twitter" />
+            </svg>
+            <a
+              target="_blank"
+              href="https://twitter.com/{{dt.user.twitterUsername}}"
+            >
+              <span>{{dt.user.twitterUsername}}</span>
+            </a>
+          </div>
+          {{/if}} {{#if cfg.gitlabId}}
+          <div id="pf-info-gitlab">
+            <svg class="pf-info-icon icon-f">
+              <use xlink:href="/svg/svg-defs.svg#gitlab" />
+            </svg>
+            <a target="_blank" href="https://gitlab.com/{{cfg.gitlabId}}">
+              <span>{{cfg.gitlabId}}</span>
+            </a>
+          </div>
+          {{/if}} {{#each cfg.infoLinks}}
+          <div>
+            <svg class="pf-info-icon icon-f">
+              <use xlink:href="/svg/svg-defs.svg#link" />
+            </svg>
+            <a href="{{this.link}}">
+              <span>{{this.name}}</span>
+            </a>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      <!-- Repository Block -->
+      <div id="repo-block">
+        {{#if cfg.profileREADME}}
+        <div id="readme">{{dt.renderedReadme}}</div>
+        {{/if}}
+
+        <div id="repo-grid" class="grid">
+          <!-- repository cards go here -->
+          {{#each dt.user.uniqueRepositories}}
+          <div class="grid-item">
+            {{#if this.primaryLanguage}}
+            <div class="repo-lang">
+              <span>{{this.primaryLanguage.name}}</span>
+            </div>
+            {{/if}}
+            <div class="repo-about">
+              <a href="{{this.url}}">
+                <span class="repo-title">
+                  {{#if this.isFork}}
+                  <svg class="icon-fork">
+                    <use xlink:href="/svg/svg-defs.svg#fork"></use>
+                  </svg>
+                  {{/if}} {{this.name}}
+                </span>
+                <span class="repo-desc">
+                  {{#if ../cfg.socialPreviewImage}} {{#if
+                  this.usesCustomOpenGraphImage}}
+                  <img
+                    class="repo-socialprev-img"
+                    src="/images/{{this.name}}.webp"
+                    alt="{{this.name}} social preview image"
+                    width="320"
+                    height="160"
+                  />
+
+                  {{/if}} {{/if}} {{#if this.description}} {{this.description}}
+                  {{/if}}
+                </span>
+              </a>
+            </div>
+            <div class="repo-stats">
+              <svg class="icon-star">
+                <use xlink:href="/svg/svg-defs.svg#star" />
+              </svg>
+              <span>{{this.stargazers.totalCount}}</span>
+              <svg class="icon-fork">
+                <use xlink:href="/svg/svg-defs.svg#fork" />
+              </svg>
+              <span>{{this.forkCount}}</span>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <!-- Scripts -->
+    <script type="module" src="/main.js"></script>
+    <!-- Built using Portfolio (https://github.com/shaansubbaiah/Portfolio) -->
+  </body>
+</html>

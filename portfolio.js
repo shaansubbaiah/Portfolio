@@ -1,17 +1,27 @@
 import inquirer from "inquirer";
 import fs from "fs-extra";
 import path from "path";
+import { exec } from "child_process";
 import { fileURLToPath } from "url";
-import { build } from "./utils/build.js";
+import { getData } from "./utils/getData.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const CONFIG_PATH = path.join(__dirname, "config.json");
+const ENV_PATH = path.join(__dirname, ".env");
+
+function getSanitizedLink(link) {
+  if (!/^https?:\/\//i.test(link)) {
+    return "https://" + link;
+  }
+  return link;
+}
 
 async function setConfig() {
   let cfg = {};
 
-  const exists = fs.existsSync(path.join(__dirname, "config.json"));
+  const exists = fs.existsSync(CONFIG_PATH);
   if (exists) {
-    cfg = await fs.readJson("config.json", { throws: false });
+    cfg = await fs.readJson(CONFIG_PATH, { throws: false });
   }
 
   const config = await inquirer.prompt([
@@ -94,9 +104,15 @@ async function setConfig() {
     ]);
 
     if (type === "navLink")
-      cfg.navLinks.push({ name: linkInquiry.name, link: linkInquiry.link });
+      cfg.navLinks.push({
+        name: linkInquiry.name,
+        link: getSanitizedLink(linkInquiry.link),
+      });
     else if (type === "infoLink")
-      cfg.infoLinks.push({ name: linkInquiry.name, link: linkInquiry.link });
+      cfg.infoLinks.push({
+        name: linkInquiry.name,
+        link: getSanitizedLink(linkInquiry.link),
+      });
 
     if (linkInquiry.addMore) {
       await inquireLink(type);
@@ -125,10 +141,10 @@ async function setConfig() {
     await inquireLink("infoLink");
   }
 
-  await fs.writeJson("config.json", cfg, { spaces: "\t" });
-  const obj = await fs.readJson("config.json", { throws: false });
+  await fs.writeJson(CONFIG_PATH, cfg, { spaces: "\t" });
+  // const obj = await fs.readJson("config.json", { throws: false });
   console.log("\nConfig written to config.json");
-  console.log(obj);
+  console.log(cfg);
 
   console.log("Config set!");
 }
@@ -143,7 +159,7 @@ async function setToken() {
     message: "Enter GitHub token:",
     mask: "*",
   });
-  await fs.outputFile(`./.env`, `GITHUB_TOKEN="${answer.token}"`);
+  await fs.outputFile(ENV_PATH, `GITHUB_TOKEN="${answer.token}"`);
 }
 
 async function portfolio() {
@@ -170,7 +186,18 @@ async function portfolio() {
   } else if (choice.action === "Set configuration options") {
     await setConfig();
   } else if (choice.action === "Build Portfolio") {
-    await build();
+    await getData();
+    exec("npm run build", (error, stdout, stderr) => {
+      if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+      }
+      console.log(`stdout: ${stdout}`);
+    });
   } else {
     process.exit(0);
   }
