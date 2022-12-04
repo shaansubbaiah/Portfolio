@@ -13,13 +13,18 @@
 </div>
 
 ## Features
-- Responsive
-- Dark Mode
-- Customizable colors, no. of repos, social, links, etc
-- Supports displaying repository social preview images
-- Display GitHub profile README.md
-- (**TODO**) GitHub Gists support _using iframe embeds_
-- (**TODO**) Blurry/Frosted glass styled repo cards
+
+- Website features
+  - Responsive
+  - Dark Mode
+  - SEO score of 100 on Lighthouse
+  - Customizable colors, no. of repos, social, links, etc
+  - Supports displaying repository social preview images
+  - Display GitHub profile README.md
+  - To-do: GitHub Gists support _using iframe embeds_
+  - To-do: Blurry/Frosted glass styled repo cards
+- Deploy to GitHub pages directly from Portfolio
+- Uses ViteJS under the hood fu=or building, live preview on development
 
 ## Getting Started
 
@@ -47,8 +52,29 @@ node portfolio.js
 
 > Make sure you have selected atleast **public_repo**, **read:user** permissions while creating the token!
 
-**Done!** Copy contents in the _dist_ folder to your github pages repository.
-Eg. your-username.github.io
+5. You can deploy the website to your github pages site (generally https://<your_username>.github.io) from Portfolio. OR Manually copy contents in `dist/` to your github pages repository.
+
+6. Done
+
+## Development
+
+Portfolio now uses ViteJS which significantly improves over the previosuly existing development workflow.
+
+The website files are in `src/`
+
+To view the site with hot-reload on changes, run:
+
+```bash
+npm run dev
+```
+
+If there's data missing, you might have to build the site once so it writes the GitHub data to `./github-data.json`
+
+## Building
+
+Run Portfolio and select the build option.
+
+Under the hood, Portfolio runs `vite build` which reads the config from `vite.config.js` and the build files are at `dist/`
 
 ## Configuration
 
