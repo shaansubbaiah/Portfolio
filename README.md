@@ -30,11 +30,17 @@
 
 ### Install
 
-1. Download and extract the [latest release](https://github.com/shaansubbaiah/Portfolio/releases)
+1. Clone the repo or download the [latest release](https://github.com/shaansubbaiah/Portfolio/releases)
+
+```
+git clone git@github.com:shaansubbaiah/Portfolio.git
+```
 
 2. Install dependencies
 
 ```bash
+cd Portfolio
+
 npm install
 ```
 
