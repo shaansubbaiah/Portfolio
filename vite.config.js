@@ -6,6 +6,11 @@ import githubData from "./github-data.json";
 export default defineConfig({
   root: "src",
   publicDir: "../public",
+  build: {
+    outDir: "../dist",
+    emptyOutDir: true,
+  },
+  base: "/",
   plugins: [
     handlebars({
       context: {
