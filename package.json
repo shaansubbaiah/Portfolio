@@ -12,7 +12,8 @@
   "author": "Shaan Subbaiah <shaansubbaiah.cs18@bmsce.ac.in>",
   "license": "MIT",
   "dependencies": {
-    "@fontsource/poppins": "^4.5.10"
+    "@fontsource/poppins": "^4.5.10",
+    "masonry-layout": "^4.2.2"
   },
   "devDependencies": {
     "axios": "^0.21.2",
