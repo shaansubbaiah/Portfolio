@@ -123,4 +123,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 
-[MIT](LICENSE) Copyright (c) 2020 Shaan Subbaiah
+[MIT](LICENSE) Copyright (c) 2022 Shaan Subbaiah
