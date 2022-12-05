@@ -6,6 +6,7 @@ import "@fontsource/poppins/700.css";
 import "./style.css";
 
 import Masonry from "masonry-layout";
+import confetti from "canvas-confetti";
 
 //          Dark mode toggle
 // @SEE https://ryanfeigenbaum.com/dark-mode/

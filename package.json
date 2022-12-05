@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "@fontsource/poppins": "^4.5.10",
+    "canvas-confetti": "^1.6.0",
     "masonry-layout": "^4.2.2"
   },
   "devDependencies": {
