@@ -84,12 +84,12 @@ async function downloadImages(data) {
         if (err) console.log("Error: " + err);
       }
     );
+    console.log("---- Downloaded avatar");
   } catch (err) {
     console.log("Failed!");
     console.error("Error: " + err.message);
     process.exit(1);
   }
-  console.log("-- Downloaded avatar");
 
   // Get social preview image and store it locally
   const repos = data.user.uniqueRepositories;
@@ -113,7 +113,7 @@ async function downloadImages(data) {
       }
     }
   }
-  console.log("-- Downloaded repo social preview images");
+  console.log("---- Downloaded repo social preview images");
 }
 
 async function getGithubData() {
@@ -131,7 +131,7 @@ async function getGithubData() {
   {
     user(login: "${cfg.username}") {
       avatarUrl(size: 500)
-      bioHTML
+      bio
       company
       createdAt
       name
