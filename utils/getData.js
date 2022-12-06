@@ -31,7 +31,7 @@ async function getImage(pathOrUrl) {
   }
 }
 
-function renderREADME() {
+function renderREADME(readmeData) {
   const md = markdownit({
     html: true,
     breaks: true,
@@ -39,7 +39,7 @@ function renderREADME() {
     typographer: true,
   });
 
-  let mdProfileREADME = md.render(dt.user.repository.object.text);
+  let mdProfileREADME = md.render(readmeData);
   // Append '?raw=true' to images hosted on GitHub
   mdProfileREADME = mdProfileREADME.replace(
     /\b(https:\/\/github\.com\/\S+(?:png|jpe?g|gif))\b/gim,
@@ -245,8 +245,8 @@ async function getGithubData() {
 
   data.user.uniqueRepositories = repos;
 
-  if (cfg.profileREADME && user.repository.object.text)
-    data.renderedReadme = renderREADME();
+  if (cfg.profileREADME && data.user.repository.object.text)
+    data.renderedReadme = renderREADME(data.user.repository.object.text);
 
   return data;
 }
