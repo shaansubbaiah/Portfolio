@@ -547,6 +547,22 @@ a {
   transition: all 0.2s ease-in-out;
 }
 
+#pf-img-source:active {
+  animation: press 0.2s 0.75 ease;
+}
+
+@keyframes press {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.92);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 /* when hover is supported */
 @media (hover: hover) {
   /* profile image animations */

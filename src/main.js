@@ -67,7 +67,7 @@ function getRandomArbitrary(min, max) {
 let avatarClickCount = 0;
 document.getElementById("pf-img-source").onclick = function avatarClick() {
   avatarClickCount += 1;
-  if (avatarClickCount == 3) {
+  if (avatarClickCount % 3 == 0) {
     // @SEE github.com/catdad/canvas-confetti
     confetti({
       particleCount: 100,
@@ -90,7 +90,6 @@ document.getElementById("pf-img-source").onclick = function avatarClick() {
       spread: 55,
       origin: { x: 1 },
     });
-    console.log("Ahah! 🥚🐇🎊");
-    avatarClickCount = 0;
+    if (avatarClickCount == 3) console.log("Found the easter egg! 🥚🐇");
   }
 };
