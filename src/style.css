@@ -104,8 +104,10 @@ a {
 @media only screen and (min-width: 800px) {
   #container {
     display: grid;
-    grid-template-columns: minmax(50px, auto) 340px minmax(400px, 1200px) minmax(50px,
-        auto);
+    grid-template-columns: minmax(50px, auto) 340px minmax(400px, 1200px) minmax(
+        50px,
+        auto
+      );
     grid-template-rows: 140px 400px auto;
     grid-template-areas:
       ". name-block     nav-block  ."
@@ -309,14 +311,6 @@ a {
   margin: 5px 10px;
   display: flex;
   flex-direction: row;
-}
-
-#pf-info-links div:hover {
-  color: var(--lang-color);
-}
-
-#pf-info-links div:hover .pf-info-icon {
-  stroke: var(--lang-color);
 }
 
 .pf-info-icon {
@@ -536,26 +530,11 @@ a {
 
 */
 
-/* profile image animations */
-
 #pf-img-container,
 #pf-img-source,
 #pf-img-shadow {
   transition: all 0.3s ease-in-out;
 }
-
-#pf-img-container:hover>#pf-img-source {
-  /* positioned relatively, top -20px */
-  top: -28px;
-}
-
-#pf-img-container:hover>#pf-img-shadow {
-  /* positioned relatively, top -145px */
-  top: 142px;
-  opacity: 0.45;
-}
-
-/* repository card animations */
 
 .repo-lang,
 .repo-about,
@@ -564,26 +543,51 @@ a {
   transition: all 0.3s ease-in-out;
 }
 
-.grid-item:hover>.repo-lang {
-  /* positioned relatively, top -25px */
-  top: -32px;
-}
-
-.grid-item:hover>.repo-about {
-  transform: scale(1.03);
-}
-
-.grid-item:hover>.repo-stats {
-  /* positioned relatively, bottom -25px */
-  bottom: -32px;
-}
-
 .color-mode-btn {
   transition: all 0.2s ease-in-out;
 }
 
-.color-mode-btn:hover {
-  transform: rotate(-20deg);
+/* when hover is supported */
+@media (hover: hover) {
+  /* profile image animations */
+  #pf-img-container:hover > #pf-img-source {
+    /* positioned relatively, top -20px */
+    top: -28px;
+  }
+
+  #pf-img-container:hover > #pf-img-shadow {
+    /* positioned relatively, top -145px */
+    top: 142px;
+    opacity: 0.45;
+  }
+
+  /* repository card animations */
+  .grid-item:hover > .repo-lang {
+    /* positioned relatively, top -25px */
+    top: -32px;
+  }
+
+  .grid-item:hover > .repo-about {
+    transform: scale(1.03);
+  }
+
+  .grid-item:hover > .repo-stats {
+    /* positioned relatively, bottom -25px */
+    bottom: -32px;
+  }
+
+  .color-mode-btn:hover {
+    transform: rotate(-20deg);
+  }
+
+  /* highlight info links on hover */
+  #pf-info-links div:hover {
+    color: var(--lang-color);
+  }
+
+  #pf-info-links div:hover .pf-info-icon {
+    stroke: var(--lang-color);
+  }
 }
 
 /* make user mentions BOLD */

@@ -255,7 +255,7 @@ export async function getData() {
   console.log("Fetching data from GitHub");
   const data = await getGithubData();
 
-  console.log("Writing data to " + GITHUB_DATA_EXPORT_PATH);
+  console.log("---- Writing data to " + GITHUB_DATA_EXPORT_PATH);
   await fs.writeJson(GITHUB_DATA_EXPORT_PATH, data, {
     spaces: "\t",
   });
