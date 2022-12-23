@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CONFIG_PATH = path.join(__dirname, "..", "config.json");
+let cfg;
 
 function getSanitizedLink(link) {
   if (!/^https?:\/\//i.test(link)) {
@@ -52,7 +53,7 @@ async function inquireLink(type) {
 }
 
 export async function setConfig() {
-  let cfg = {};
+  cfg = {};
 
   const exists = fs.existsSync(CONFIG_PATH);
   if (exists) {
