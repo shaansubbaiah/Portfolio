@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "private": true,
-  "version": "1.6.0",
+  "version": "2.1",
   "description": "Automatically generates a responsive, static-site with the user’s Github projects.",
   "type": "module",
   "scripts": {
